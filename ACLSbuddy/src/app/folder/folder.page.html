@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ folder }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ folder }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <ion-button (click)="start()" color="success" expand="block" shape="round" size="large">Start</ion-button>
+  </div>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <div class="ion-text-end">
+    <ion-title>Time:</ion-title>
+    <h1 text-center class="color-white font-lg">
+      {{timerservice.time}}
+    </h1>
+  </div>
+  </ion-toolbar>
+</ion-footer>
