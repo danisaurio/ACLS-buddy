@@ -8,11 +8,12 @@ import { FolderPage } from './folder/folder.page';
 })
 export class AclsService {
 
-  private step:number;
+  public step:number;
   public doShock: Subject<void>;
   public askRhythm: Subject<void>;
   public step12input: Subject<void>;
-  public messageToDisplay: string;
+  public disableButton: Boolean;
+  public showStopButton;
 
   constructor(
     public timerservice:TimerService,
@@ -90,38 +91,39 @@ export class AclsService {
   async step3(){
     this.doShock.next();
     this.step = 3;
-    this.messageToDisplay = 'step3' 
     await this.timerservice.twoMinNotification();
     this.askRhythm.next();   
   }
   async step5(){
+    this.disableButton = false;
     this.doShock.next();
     this.step = 5;
-    this.messageToDisplay = 'step5' 
     await this.timerservice.twoMinNotification();
     this.askRhythm.next();   
   }
   async step7(){
+    this.disableButton = false;
     this.doShock.next();
     this.step = 7;
-    this.messageToDisplay = 'step7' 
     await this.timerservice.twoMinNotification();
     this.askRhythm.next();  
   }
   async step10(){
+    this.disableButton = false;
     this.step = 10;
-    this.messageToDisplay = 'step10' 
     await this.timerservice.twoMinNotification();
     this.askRhythm.next();  
   }
   async step11(){
     this.step = 11;
-    this.messageToDisplay = 'step11' 
     await this.timerservice.twoMinNotification();
     this.askRhythm.next();  
   }
   step12(){
     this.step12input.next();
+  }
+  drugAdmin(string){
+    this.disableButton = true;
   }
 
   }

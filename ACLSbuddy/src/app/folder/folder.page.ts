@@ -36,6 +36,7 @@ export class FolderPage implements OnInit {
   start() {
     this.aclsService.startTimer();
     this.askRhythm();
+    this.aclsService.showStopButton = true;
   }
 
   async doShock() {
@@ -85,7 +86,7 @@ export class FolderPage implements OnInit {
         {
           text: 'YES',
           handler: data => {
-            this.aclsService.messageToDisplay = "<h1>Well done!<h1><br><p>Do post-cardiac arrest care</p>";
+            this.aclsService.step = 12;
           }
         },
         {
