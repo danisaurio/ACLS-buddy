@@ -22,10 +22,6 @@ export class FolderPage implements OnInit {
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
-    this.aclsService.doShock.subscribe(() => {
-        this.doShock();
-
-    });
     this.aclsService.askRhythm.subscribe(() => {
         this.askRhythm();
     });
@@ -41,17 +37,6 @@ export class FolderPage implements OnInit {
     this.aclsService.startTimer();
     this.askRhythm();
     this.aclsService.showStopButton = true;
-  }
-
-  async doShock() {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      mode: "ios",
-      header: 'SHOCK!',
-      message: 'click OK when done',
-      buttons: ['OK']
-    });
-    await alert.present();
   }
 
   async askRhythm() {
@@ -123,7 +108,7 @@ export class FolderPage implements OnInit {
   }
   restartValues(){
     this.timerservice.time = "00:00.000";
-    this.aclsService.step=undefined;
+    this.aclsService.step=0;
     this.aclsService.antiArrDose=0;
     this.aclsService.doseLido = '1 - 1.5 mg/kg';
     this.aclsService.doseAmio = '300 mg bolus';

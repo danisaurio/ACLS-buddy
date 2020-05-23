@@ -15,14 +15,25 @@
   </ion-header>
 
   <div id="container">
-    <ion-button *ngIf="aclsService.step === undefined"
+    <ion-button *ngIf="aclsService.step === 0"
     (click)="start()" color="success" expand="block" shape="round" size="large">Start</ion-button>
-    <div *ngIf="aclsService.step === 3">
+    <div *ngIf="aclsService.step === 3 || aclsService.step===5 || aclsService.step==7">
+      <p>:</p><br>
+      <h1><b>Shock!</b></h1><br>
+      <p><b>Biphasic:</b> Manufacturer recommendation or max available<br>
+        <b>Monophasic:</b> 360J
+      </p>
+      <ion-button (click)="aclsService.giveShock(aclsService.step)" 
+        color="danger"
+        expand="block" 
+        shape="round">Shock Given</ion-button>
+    </div>
+    <div *ngIf="aclsService.step === 4">
       <p>Step 3:</p><br>
       <h1><b>CPR 2 min</b></h1><br>
       <h3>IV/IO access</h3>
     </div>
-    <div *ngIf="aclsService.step === 5">
+    <div *ngIf="aclsService.step === 6">
       <p>Step 5:</p><br>
       <h1><b>CPR 2 min</b></h1><br>
       <h3>Epinephrine 1mg</h3><br>
@@ -33,7 +44,7 @@
         shape="round">Confirm Epinephine 1mg administration</ion-button>
       <h3>Consider advanced airway, capnography</h3>
     </div>
-    <div *ngIf="aclsService.step === 7">
+    <div *ngIf="aclsService.step === 8">
       <p>Step 7:</p><br>
       <h1><b>CPR 2 min</b></h1><br>
       <h3>Amiodarone {{aclsService.doseAmio}} or Lidocaine {{aclsService.doseLido}}</h3><br>
