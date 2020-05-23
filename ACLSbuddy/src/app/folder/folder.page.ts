@@ -21,19 +21,24 @@ export class FolderPage implements OnInit {
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
-    this.aclsService.doShock.subscribe((show) => {
-      if (show) {
-        this.shockalert();
-      }
+    this.aclsService.doShock.subscribe(() => {
+        this.doShock();
+
+    });
+    this.aclsService.askRhythm.subscribe(() => {
+        this.askRhythm();
+    });
+    this.aclsService.step12input.subscribe(() => {
+        this.rosc();
     });
   }
 
   start() {
     this.aclsService.startTimer();
-    this.shockeable();
+    this.askRhythm();
   }
 
-  async shockalert() {
+  async doShock() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       mode: "ios",
@@ -48,7 +53,7 @@ export class FolderPage implements OnInit {
     await alert.present();
   }
 
-  async shockeable() {
+  async askRhythm() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       mode: "ios",
@@ -65,6 +70,28 @@ export class FolderPage implements OnInit {
           text: 'NO',
           handler: data => {
             this.aclsService.decision('n');
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+  async rosc() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      mode: "ios",
+      header: 'Are there signs of return of spontaneous circulation?',
+      buttons: [
+        {
+          text: 'YES',
+          handler: data => {
+            this.aclsService.messageToDisplay = "<h1>Well done!<h1><br><p>Do post-cardiac arrest care</p>";
+          }
+        },
+        {
+          text: 'NO',
+          handler: data => {
+            this.aclsService.step10();
           }
         }
       ]

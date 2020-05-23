@@ -15,7 +15,12 @@
   </ion-header>
 
   <div id="container">
-    <ion-button (click)="start()" color="success" expand="block" shape="round" size="large">Start</ion-button>
+    <ion-button 
+    *ngIf="aclsService.messageToDisplay === undefined"
+    (click)="start()" color="success" expand="block" shape="round" size="large">Start</ion-button>
+    <p *ngIf="aclsService.messageToDisplay">
+      {{aclsService.messageToDisplay}}
+    </p>
   </div>
 </ion-content>
 <ion-footer class="ion-no-border">

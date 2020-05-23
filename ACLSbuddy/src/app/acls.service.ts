@@ -1,38 +1,127 @@
 import { Injectable } from '@angular/core';
 import { TimerService } from './timer.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { FolderPage } from './folder/folder.page';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AclsService {
 
-  private step;
-  public doShock: BehaviorSubject<boolean>;
+  private step:number;
+  public doShock: Subject<void>;
+  public askRhythm: Subject<void>;
+  public step12input: Subject<void>;
+  public messageToDisplay: string;
 
   constructor(
-    public timerservice:TimerService) {
-      this.doShock = new BehaviorSubject(false);
+    public timerservice:TimerService,
+    ) {
+      this.doShock = new Subject();
+      this.step12input = new Subject();
+      this.askRhythm = new Subject()
     }
 
   startTimer() {
     this.timerservice.start();
   }
   decision(string){
-    if (this.step == undefined) {
-      if (string == 'y'){
-        this.step = 3;
-        this.doShock.next(true);
+    if (this.step === undefined) {
+      if (string === 'y'){
+        this.step3();
+        return;
       }
       else{
-        this.step = 10;
         this.step10();
+        return;
       }
     }
-    console.log(string);
+    if(this.step===3){
+      if(string==='y'){
+        this.step5();
+        return;
+      }
+      else{
+        this.step12();
+        return;
+      }
+    }
+    if(this.step===5){
+      if(string==='y'){
+        this.step7();
+        return;
+      }
+      else{
+        this.step12();
+        return;
+      }
+    }
+    if(this.step===7){
+      if(string==='y'){
+        this.step5();
+        return;
+      }
+      else{
+        this.step12();
+        return;
+      }
+    }
+    if (this.step === 10){
+      if (string === 'y'){
+        this.step5();
+        return;
+      }
+      else{
+        this.step11();
+        return;
+      }
+    }
+    if (this.step === 11){
+      if (string === 'y'){
+        this.step5();
+        return;
+      }
+      else{
+        this.step12();
+        return;
+      }
+    }
   }
-  step10(){
-    
+  async step3(){
+    this.doShock.next();
+    this.step = 3;
+    this.messageToDisplay = 'step3' 
+    await this.timerservice.twoMinNotification();
+    this.askRhythm.next();   
+  }
+  async step5(){
+    this.doShock.next();
+    this.step = 5;
+    this.messageToDisplay = 'step5' 
+    await this.timerservice.twoMinNotification();
+    this.askRhythm.next();   
+  }
+  async step7(){
+    this.doShock.next();
+    this.step = 7;
+    this.messageToDisplay = 'step7' 
+    await this.timerservice.twoMinNotification();
+    this.askRhythm.next();  
+  }
+  async step10(){
+    this.step = 10;
+    this.messageToDisplay = 'step10' 
+    await this.timerservice.twoMinNotification();
+    this.askRhythm.next();  
+  }
+  async step11(){
+    this.step = 11;
+    this.messageToDisplay = 'step11' 
+    await this.timerservice.twoMinNotification();
+    this.askRhythm.next();  
+  }
+  step12(){
+    this.step12input.next();
   }
 
   }

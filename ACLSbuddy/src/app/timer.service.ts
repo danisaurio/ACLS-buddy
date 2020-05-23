@@ -61,5 +61,10 @@ export class TimerService {
       this.zeroPrefix(sec, 2) + "." +
       this.zeroPrefix(ms, 3);
     };
+    twoMinNotification(){
+      return new Promise(resolve => {
+        setTimeout(() => resolve(), 5000);
+      })
+    }
 
 }
