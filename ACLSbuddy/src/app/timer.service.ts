@@ -12,6 +12,7 @@ export class TimerService {
   public running = false
   public blankTime = "00:00.000"
   public time = "00:00.000"
+  public timeoutId;
 
   constructor() { }
 
@@ -63,8 +64,11 @@ export class TimerService {
     };
     twoMinNotification(){
       return new Promise(resolve => {
-        setTimeout(() => resolve(), 5000);
+        this.timeoutId = setTimeout(() => resolve(), 5000);
       })
+    }
+    stopTimeout(){
+      clearTimeout(this.timeoutId)
     }
 
 }

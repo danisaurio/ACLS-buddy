@@ -12,19 +12,30 @@ export class AclsService {
   public doShock: Subject<void>;
   public askRhythm: Subject<void>;
   public step12input: Subject<void>;
+  public stopButtonPressed: Subject<void>;
   public disableButton: Boolean;
   public showStopButton;
+  public antiArrDose: number = 0;
+  public doseLido = '1 - 1.5 mg/kg';
+  public doseAmio = '300 mg bolus';
+  public selectedDrug = undefined;
+
 
   constructor(
     public timerservice:TimerService,
     ) {
       this.doShock = new Subject();
       this.step12input = new Subject();
-      this.askRhythm = new Subject()
+      this.askRhythm = new Subject();
+      this.stopButtonPressed = new Subject();
     }
 
   startTimer() {
     this.timerservice.start();
+  }
+  stopTimer() {
+    this.timerservice.stop();
+
   }
   decision(string){
     if (this.step === undefined) {
@@ -102,6 +113,11 @@ export class AclsService {
     this.askRhythm.next();   
   }
   async step7(){
+    if (this.antiArrDose !== 0){
+      this.doseLido = '0,5 - 0,75 mg/kg'
+      this.doseAmio = '150 mg'
+    }
+    this.antiArrDose += this.antiArrDose+1;
     this.disableButton = false;
     this.doShock.next();
     this.step = 7;
@@ -122,8 +138,15 @@ export class AclsService {
   step12(){
     this.step12input.next();
   }
+  stopPressed(){
+    this.stopButtonPressed.next();
+  }
   drugAdmin(string){
     this.disableButton = true;
+    if (string == 'amio' || string == 'lido'){
+      this.selectedDrug = string;
+    }
+    
   }
 
   }

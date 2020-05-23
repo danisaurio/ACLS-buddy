@@ -36,18 +36,22 @@
     <div *ngIf="aclsService.step === 7">
       <p>Step 7:</p><br>
       <h1><b>CPR 2 min</b></h1><br>
-      <h3>Amiodarone *** or Lidocaine ***</h3><br>
-      <ion-button (click)="aclsService.drugAdmin('ami')" 
+      <h3>Amiodarone {{aclsService.doseAmio}} or Lidocaine {{aclsService.doseLido}}</h3><br>
+      <ion-button 
+        *ngIf="this.aclsService.selectedDrug !== 'lido'"
+        (click)="aclsService.drugAdmin('amio')" 
         [disabled]="aclsService.disableButton"
         color="success"
         expand="block" 
-        shape="round">Confirm Amiodarone *** administration</ion-button>
+        shape="round">Confirm Amiodarone {{aclsService.doseAmio}} administration</ion-button>
       <br>
-      <ion-button (click)="aclsService.drugAdmin('lido')" 
+      <ion-button 
+        *ngIf="this.aclsService.selectedDrug !== 'amio'" 
+        (click)="aclsService.drugAdmin('lido')" 
         [disabled]="aclsService.disableButton"
         color="success"
         expand="block" 
-        shape="round">Confirm Lidocaine *** administration</ion-button>
+        shape="round">Confirm Lidocaine {{aclsService.doseLido}} administration</ion-button>
     </div>
     <div *ngIf="aclsService.step === 10">
       <p>Step 10:</p><br>
@@ -80,7 +84,7 @@
     </h1>
   </div>
   </ion-toolbar>
-  <ion-button (click)=1
+  <ion-button (click)="aclsService.stopPressed()"
   *ngIf = "aclsService.showStopButton == true"
   color="success"
   expand="block" 
