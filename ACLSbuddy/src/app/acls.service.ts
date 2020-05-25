@@ -11,7 +11,6 @@ export class AclsService {
   public step:number = 0;
   public askRhythm: Subject<void>;
   public step12input: Subject<void>;
-  public stopButtonPressed: Subject<void>;
   public disableButton: Boolean;
   public showStopButton;
   public antiArrDose: number = 0;
@@ -25,19 +24,10 @@ export class AclsService {
     ) {
       this.step12input = new Subject();
       this.askRhythm = new Subject();
-      this.stopButtonPressed = new Subject();
     }
-
-  startTimer() {
-    this.timerservice.start();
-  }
-  stopTimer() {
-    this.timerservice.stop();
-
-  }
   decision(string){
     if (this.step === 0) {
-      if (string === 'y'){
+      if (string === 'isShockeable'){
         this.step3();
         return;
       }
@@ -47,7 +37,7 @@ export class AclsService {
       }
     }
     if(this.step===4){
-      if(string==='y'){
+      if(string==='isShockeable'){
         this.step5();
         return;
       }
@@ -57,7 +47,7 @@ export class AclsService {
       }
     }
     if(this.step===6){
-      if(string==='y'){
+      if(string==='isShockeable'){
         this.step7();
         return;
       }
@@ -67,7 +57,7 @@ export class AclsService {
       }
     }
     if(this.step===8){
-      if(string==='y'){
+      if(string==='isShockeable'){
         this.step5();
         return;
       }
@@ -77,7 +67,7 @@ export class AclsService {
       }
     }
     if (this.step === 10){
-      if (string === 'y'){
+      if (string === 'isShockeable'){
         this.step5();
         return;
       }
@@ -87,7 +77,7 @@ export class AclsService {
       }
     }
     if (this.step === 11){
-      if (string === 'y'){
+      if (string === 'isShockeable'){
         this.step5();
         return;
       }
@@ -108,14 +98,18 @@ export class AclsService {
   }
   async step4(){
     this.step = 4;
-    await this.timerservice.twoMinNotification();
-    this.askRhythm.next();   
+    const shouldContinue = await this.timerservice.twoMinNotification();
+    if (shouldContinue === true){
+      this.askRhythm.next();
+    }
   }
   async step6(){
     this.disableButton = false;
     this.step = 6;
-    await this.timerservice.twoMinNotification();
-    this.askRhythm.next();   
+    const shouldContinue = await this.timerservice.twoMinNotification();
+    if (shouldContinue === true){
+      this.askRhythm.next();
+    }   
   }
   async step8(){
     if (this.antiArrDose !== 0){
@@ -125,25 +119,30 @@ export class AclsService {
     this.antiArrDose += this.antiArrDose+1;
     this.disableButton = false;
     this.step = 8;
-    await this.timerservice.twoMinNotification();
-    this.askRhythm.next();  
+    const shouldContinue = await this.timerservice.twoMinNotification();
+    if (shouldContinue === true){
+      this.askRhythm.next();
+    }  
   }
   async step10(){
     this.disableButton = false;
     this.step = 10;
-    await this.timerservice.twoMinNotification();
-    this.askRhythm.next();  
+    const shouldContinue = await this.timerservice.twoMinNotification();
+    if (shouldContinue === true){
+      this.askRhythm.next();
+    }  
   }
   async step11(){
     this.step = 11;
-    await this.timerservice.twoMinNotification();
-    this.askRhythm.next();  
+    const shouldContinue = await this.timerservice.twoMinNotification();
+    if (shouldContinue === true){
+      this.askRhythm.next();
+    } 
   }
   step12(){
     this.step12input.next();
   }
-  giveShock(step){
-    console.log(step)
+  giveShock(step: number){
     if (step === 3){
       this.step4();
     }
@@ -155,9 +154,6 @@ export class AclsService {
     }
 
   }
-  stopPressed(){
-    this.stopButtonPressed.next();
-  }
   drugAdmin(string){
     this.disableButton = true;
     if (string == 'amio' || string == 'lido'){
@@ -165,5 +161,4 @@ export class AclsService {
     }
     
   }
-
   }

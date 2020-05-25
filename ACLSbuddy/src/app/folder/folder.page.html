@@ -29,12 +29,12 @@
         shape="round">Shock Given</ion-button>
     </div>
     <div *ngIf="aclsService.step === 4">
-      <p>Step 3:</p><br>
+      <p>Step 4:</p><br>
       <h1><b>CPR 2 min</b></h1><br>
       <h3>IV/IO access</h3>
     </div>
     <div *ngIf="aclsService.step === 6">
-      <p>Step 5:</p><br>
+      <p>Step 6:</p><br>
       <h1><b>CPR 2 min</b></h1><br>
       <h3>Epinephrine 1mg</h3><br>
       <ion-button (click)="aclsService.drugAdmin('epi')" 
@@ -45,7 +45,7 @@
       <h3>Consider advanced airway, capnography</h3>
     </div>
     <div *ngIf="aclsService.step === 8">
-      <p>Step 7:</p><br>
+      <p>Step 8:</p><br>
       <h1><b>CPR 2 min</b></h1><br>
       <h3>Amiodarone {{aclsService.doseAmio}} or Lidocaine {{aclsService.doseLido}}</h3><br>
       <ion-button 
@@ -95,7 +95,7 @@
     </h1>
   </div>
   </ion-toolbar>
-  <ion-button (click)="aclsService.stopPressed()"
+  <ion-button (click)="stopButtonPressed()"
   *ngIf = "aclsService.showStopButton == true"
   color="success"
   expand="block" 

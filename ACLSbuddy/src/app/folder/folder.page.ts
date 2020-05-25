@@ -28,13 +28,10 @@ export class FolderPage implements OnInit {
     this.aclsService.step12input.subscribe(() => {
         this.rosc();
     });
-    this.aclsService.stopButtonPressed.subscribe(() => {
-      this.stopButtonPressed();
-  });
   }
 
   start() {
-    this.aclsService.startTimer();
+    this.timerservice.start();
     this.askRhythm();
     this.aclsService.showStopButton = true;
   }
@@ -49,13 +46,13 @@ export class FolderPage implements OnInit {
         {
           text: 'YES',
           handler: data => {
-            this.aclsService.decision('y');
+            this.aclsService.decision('isShockeable');
           }
         },
         {
           text: 'NO',
           handler: data => {
-            this.aclsService.decision('n');
+            this.aclsService.decision('isNotShockeable');
           }
         }
       ]
@@ -72,7 +69,7 @@ export class FolderPage implements OnInit {
           text: 'YES',
           handler: data => {
             this.aclsService.step = 12;
-            this.aclsService.stopTimer();
+            this.timerservice.stop();
           }
         },
         {
@@ -94,8 +91,8 @@ export class FolderPage implements OnInit {
         {
           text: 'YES',
           handler: data => {
-            this.timerservice.stopTimeout();
-            this.aclsService.stopTimer();
+            this.timerservice.stopTwoMinNotification();
+            this.timerservice.stop();
             this.gatherPatientData();
           }
         },

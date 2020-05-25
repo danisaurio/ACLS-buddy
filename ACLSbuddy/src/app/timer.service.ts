@@ -13,6 +13,7 @@ export class TimerService {
   public blankTime = "00:00.000"
   public time = "00:00.000"
   public timeoutId;
+  public shouldContinue: boolean;
 
   constructor() { }
 
@@ -63,12 +64,13 @@ export class TimerService {
       this.zeroPrefix(ms, 3);
     };
     twoMinNotification(){
+      this.shouldContinue = true;
       return new Promise(resolve => {
-        this.timeoutId = setTimeout(() => resolve(), 5000);
+        this.timeoutId = setTimeout(() => resolve(this.shouldContinue), 5000);
       })
     }
-    stopTimeout(){
-      clearTimeout(this.timeoutId)
+    stopTwoMinNotification(){
+      this.shouldContinue = false;
     }
 
 }
