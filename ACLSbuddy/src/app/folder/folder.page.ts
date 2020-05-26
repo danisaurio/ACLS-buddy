@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { AclsService } from '../acls.service';
 import { TimerService } from '../timer.service';
 import { AlertController } from '@ionic/angular';
+import { EventRegisterService } from '../event-register.service';
+import { getLocaleDateTimeFormat } from '@angular/common';
 
 
 @Component({
@@ -17,7 +19,9 @@ export class FolderPage implements OnInit {
     private activatedRoute: ActivatedRoute, 
     public alertController: AlertController,
     public aclsService: AclsService, 
-    public timerservice:TimerService) { }
+    public timerservice:TimerService,
+    public eventregister: EventRegisterService,
+    ) { }
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
@@ -33,6 +37,8 @@ export class FolderPage implements OnInit {
     this.timerservice.start();
     this.askRhythm();
     this.aclsService.showStopButton = true;
+    const startTime = new Date;
+    this.eventregister.rcpEventStart(startTime);
   }
 
   async askRhythm() {
@@ -84,6 +90,7 @@ export class FolderPage implements OnInit {
       await alert.present();
     }
     async stopButtonPressed(){
+      
       const alert = await this.alertController.create({
         id: 'stoplert',
         mode: "ios",
@@ -95,6 +102,8 @@ export class FolderPage implements OnInit {
             handler: data => {
               this.timerservice.stopTwoMinNotification();
               this.timerservice.stop();
+              const endTime = new Date;
+              this.eventregister.rcpEventEnds(endTime);
               this.gatherPatientData();
             }
           },

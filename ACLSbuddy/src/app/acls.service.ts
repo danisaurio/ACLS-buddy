@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { TimerService } from './timer.service';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { FolderPage } from './folder/folder.page';
+import { Subject } from 'rxjs';
+import { EventRegisterService } from './event-register.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,7 @@ export class AclsService {
 
   constructor(
     public timerservice:TimerService,
+    public eventresgister: EventRegisterService
     ) {
       this.step12input = new Subject();
       this.askRhythm = new Subject();
@@ -140,9 +142,13 @@ export class AclsService {
     } 
   }
   step12(){
+    let endByFlowchart = new Date;
+    this.eventresgister.rcpEventEnds(endByFlowchart)
     this.step12input.next();
   }
-  giveShock(step: number){
+  giveShockConfirmation(step: number){
+    let schockTime = new Date;
+    this.eventresgister.schockEvent(schockTime);
     if (step === 3){
       this.step4();
     }
@@ -155,10 +161,19 @@ export class AclsService {
 
   }
   drugAdmin(string){
+    let drugAdminTime = new Date;
+    this.eventresgister.drugEvent(string, drugAdminTime);
     this.disableButton = true;
     if (string == 'amio' || string == 'lido'){
       this.selectedDrug = string;
     }
-    
+  }
+  shockeableRhythmsStep(step){
+    if (step === 3 || step === 5 || step === 7){
+      return true;
+    }
+    else {
+      return false;
+    }
   }
   }

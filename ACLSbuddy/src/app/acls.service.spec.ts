@@ -101,17 +101,17 @@ describe('AclsService', () => {
   describe('giveShock', () => {
     it('should call step 4 if shock is given in step 3', () =>{
       spyOn(service, 'step4');
-      service.giveShock(3);
+      service.giveShockConfirmation(3);
       expect(service.step4).toHaveBeenCalled();
     })
     it('should call step 6 if shock is given in step 5', () =>{
       spyOn(service, 'step6');
-      service.giveShock(5);
+      service.giveShockConfirmation(5);
       expect(service.step6).toHaveBeenCalled();
     })
     it('should call step 8 if shock is given in step 7', () =>{
       spyOn(service, 'step8');
-      service.giveShock(7);
+      service.giveShockConfirmation(7);
       expect(service.step8).toHaveBeenCalled();
     })
   })

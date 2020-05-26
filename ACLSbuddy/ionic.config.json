@@ -1,5 +1,7 @@
 {
   "name": "ACLSbuddy",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
