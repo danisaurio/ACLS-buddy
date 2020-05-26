@@ -157,8 +157,5 @@ describe('AclsService', () => {
       expect(service.selectedDrug).toEqual('lido');
     })
    })
-   describe('stopPressed', ()=>{
-     it('should notify that RCP need to be stopped')
-   })
 });
 

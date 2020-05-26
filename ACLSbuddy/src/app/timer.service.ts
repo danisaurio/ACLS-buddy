@@ -66,7 +66,7 @@ export class TimerService {
     twoMinNotification(){
       this.shouldContinue = true;
       return new Promise(resolve => {
-        this.timeoutId = setTimeout(() => resolve(this.shouldContinue), 5000);
+        this.timeoutId = setTimeout(() => resolve(this.shouldContinue), 4000);
       })
     }
     stopTwoMinNotification(){
