@@ -1,11 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 import { EventRegisterService } from './event-register.service';
+import { Storage } from '@ionic/storage';
+import { MockStorage } from 'src/mocks/storage';
+
 
 describe('EventRegisterService', () => {
   let service: EventRegisterService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: Storage, useClass: MockStorage }
+      ]
+    });
     service = TestBed.inject(EventRegisterService);
   });
 
@@ -15,7 +22,7 @@ describe('EventRegisterService', () => {
   it('should start on an empty partialDict', ()=>{
     let date = new Date
     service.rcpEventStart(date);
-    let partialDictLenght = service.partialDict.length
+    let partialDictLenght = service.partialDict.size
     expect(partialDictLenght).toEqual(1);
   })
   it('should register current date', async()=>{
@@ -25,11 +32,11 @@ describe('EventRegisterService', () => {
     expect(partialDictValue).toEqual(date)
   })
   describe('Storage', ()=>{
-    it('key must be start time, value partialdict', ()=>{
+    it('key must be start time, value partialdict', async()=>{
       let date = new Date
       service.rcpEventStart(date);
       service.rcpEventEnds(new Date)
-      const getfromkey = service.storage.get(date.toString())
+      const getfromkey = await service.storage.get(date.toString())
       expect(getfromkey).not.toBeNull;
       expect(getfromkey).toEqual(service.partialDict)
 

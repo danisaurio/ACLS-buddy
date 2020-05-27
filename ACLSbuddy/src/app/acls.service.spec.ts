@@ -1,12 +1,18 @@
 import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { AclsService } from './acls.service';
+import { Storage } from '@ionic/storage';
+import { MockStorage } from 'src/mocks/storage';
 
 describe('AclsService', () => {
   let service: AclsService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: Storage, useClass: MockStorage }
+      ]
+    });
     service = TestBed.inject(AclsService);
   });
 
@@ -99,6 +105,9 @@ describe('AclsService', () => {
 
   })
   describe('giveShock', () => {
+    beforeEach(()=>{
+      service.eventresgister.rcpEventStart(new Date);
+    })
     it('should call step 4 if shock is given in step 3', () =>{
       spyOn(service, 'step4');
       service.giveShockConfirmation(3);
@@ -148,6 +157,9 @@ describe('AclsService', () => {
     }))
    })
    describe('drugAdmin', () => {
+     beforeEach(()=>{
+       service.eventresgister.rcpEventStart(new Date);
+     })
      it ('should set selected drug to amio if string = amio', () =>{
        service.drugAdmin('amio');
        expect(service.selectedDrug).toEqual('amio');

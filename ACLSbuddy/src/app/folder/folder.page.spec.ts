@@ -2,7 +2,8 @@ import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { FolderPage } from './folder.page';
-import { By } from '@angular/platform-browser';
+import { Storage } from '@ionic/storage';
+import { MockStorage } from 'src/mocks/storage';
 
 describe('FolderPage', () => {
   let component: FolderPage;
@@ -12,6 +13,9 @@ describe('FolderPage', () => {
     TestBed.configureTestingModule({
       declarations: [ FolderPage ],
       imports: [IonicModule.forRoot(), RouterModule.forRoot([])],
+      providers: [
+        { provide: Storage, useClass: MockStorage }
+      ]
     }).compileComponents();
     fixture = TestBed.createComponent(FolderPage);
     component = fixture.componentInstance;
