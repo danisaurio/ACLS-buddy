@@ -15,12 +15,17 @@ export class AppComponent implements OnInit {
     {
       title: 'Start CPR',
       url: '/folder/CPR',
-      icon: 'heart'
+      icon: 'pulse'
+    },
+    {
+      title: 'History',
+      url: '/folder/History',
+      icon: 'time'
     },
     {
       title: 'Statistics',
       url: '/folder/Statistics',
-      icon: 'warning'
+      icon: 'stats-chart'
     }
   ];
 

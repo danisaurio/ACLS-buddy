@@ -32,6 +32,8 @@ ion-content, ion-footer{
 ion-grid {
   height: 100%;
 }
+
+
 #rowtimer{
   align-items: center;
   height: 25%;
@@ -52,5 +54,18 @@ ion-grid {
 }
 #footer{
   height: auto;
+  background-color: rgb(240, 248, 241);
 }
+
+#rayitas{
+  color: whitesmoke;
+}
+#title{
+  color: whitesmoke;
+  font-size: x-large;
+}
+#headgrid{
+  background-color: black;
+}
+
 
