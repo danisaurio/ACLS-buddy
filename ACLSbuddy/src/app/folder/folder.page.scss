@@ -4,7 +4,7 @@ ion-menu-button {
 
 #container {
   text-align: center;
-  position: absolute;
+//  position: absolute;
   left: 0;
   right: 0;
   top: 50%;
@@ -28,5 +28,29 @@ ion-menu-button {
 }
 ion-content, ion-footer{
   --ion-background-color:rgb(240, 248, 241);
+}
+ion-grid {
+  height: 100%;
+}
+#rowtimer{
+  align-items: center;
+  height: 25%;
+}
+#coltimer{
+  text-align: center;
+}
+#timertxt{
+  font-size: 300%;
+  color:#8c8c8c
+}
+#rowcontent{
+  align-items: center;
+  height: 75%;
+}
+#colcontent{
+  text-align: center;
+}
+#footer{
+  height: auto;
 }
 
