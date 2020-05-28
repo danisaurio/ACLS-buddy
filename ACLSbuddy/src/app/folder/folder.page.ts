@@ -4,7 +4,6 @@ import { AclsService } from '../acls.service';
 import { TimerService } from '../timer.service';
 import { AlertController } from '@ionic/angular';
 import { EventRegisterService } from '../event-register.service';
-import { getLocaleDateTimeFormat } from '@angular/common';
 
 
 @Component({

@@ -8,9 +8,13 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'folder/History',
+    loadChildren: () => import('./folder/history/history.module').then( m => m.HistoryPageModule)
+  },
+  {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  }
+  },
 ];
 
 @NgModule({

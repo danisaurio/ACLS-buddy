@@ -7,28 +7,31 @@ import { Storage } from '@ionic/storage';
 export class EventRegisterService {
 
   private eventNameStr: string;
-  public partialDict: Map<string, any>;
+  public partialDict: {[key: string]: any};
   public shockDict: Array<Date>;
   public epiDict: Array<Date>;
   public antiarrDict: Array<Date>;
+  public startTimetokeep: Date;
 
   constructor(
     public storage: Storage,
   ) { }
 
   async rcpEventStart(startTime: Date){
-    this.partialDict= new Map;
+    this.partialDict= {};
     this.shockDict = new Array;
     this.epiDict = new Array;
     this.antiarrDict = new Array;
+    this.startTimetokeep = startTime;
     this.eventNameStr = startTime.toString();
-    this.partialDict.set('start', startTime);
+    this.partialDict['start'] = startTime;
   }
   async rcpEventEnds(endTime: Date){
-    this.partialDict.set('end', endTime);
-    this.partialDict.set('shock', this.shockDict);
-    this.partialDict.set('epi', this.epiDict);
-    this.partialDict.set('antiarr', this.antiarrDict);
+    this.partialDict['start'] = this.eventNameStr;
+    this.partialDict['end'] = endTime;
+    this.partialDict['shock'] = this.shockDict;
+    this.partialDict['epi'], this.epiDict;
+    this.partialDict['antiarr'] = this.antiarrDict;
     await this.storage.set(this.eventNameStr, this.partialDict);
     this.allevents();
   }
