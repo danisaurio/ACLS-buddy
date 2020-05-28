@@ -27,10 +27,9 @@ export class HistoryPage implements OnInit {
 
 
   ngOnInit() { 
-    this.valuesArray = new Array<{[key: string]: any}>();
-    this.eventregister.storage.forEach((value, key) =>{
+    this.valuesArray = [];
+    this.eventregister.storage.forEach((value) =>{
       this.valuesArray.unshift(value);
-      console.log(value);
     })
   }
   async deleteRegister(p: {[key: string]: any}){
@@ -42,8 +41,7 @@ export class HistoryPage implements OnInit {
         {
           text: 'YES',
           handler: async() => {
-            let valuetodelete = p.get('start')
-            this.eventregister.storage.remove(valuetodelete.toString());
+            this.removeValue(p)
             const alert = await this.alertController.create({
               header: 'Confirmation',
               message: 'Register deleted',
@@ -62,6 +60,11 @@ export class HistoryPage implements OnInit {
     });
     await alert.present();
   } 
+  removeValue(p: {[key: string]: any}){
+    let valuetodelete = p.start
+    this.eventregister.storage.remove(valuetodelete.toString());
+    this.valuesArray.splice(this.valuesArray.indexOf(p), 1)
+  }
   async opendetails(p: {[key: string]: any}){
     let navigationExtras: NavigationExtras = {
       state: {

@@ -11,7 +11,6 @@ export class EventRegisterService {
   public shockDict: Array<Date>;
   public epiDict: Array<Date>;
   public antiarrDict: Array<Date>;
-  public startTimetokeep: Date;
 
   constructor(
     public storage: Storage,
@@ -22,15 +21,13 @@ export class EventRegisterService {
     this.shockDict = new Array;
     this.epiDict = new Array;
     this.antiarrDict = new Array;
-    this.startTimetokeep = startTime;
     this.eventNameStr = startTime.toString();
-    this.partialDict['start'] = startTime;
   }
   async rcpEventEnds(endTime: Date){
     this.partialDict['start'] = this.eventNameStr;
     this.partialDict['end'] = endTime;
     this.partialDict['shock'] = this.shockDict;
-    this.partialDict['epi'], this.epiDict;
+    this.partialDict['epi'] = this.epiDict;
     this.partialDict['antiarr'] = this.antiarrDict;
     await this.storage.set(this.eventNameStr, this.partialDict);
     this.allevents();

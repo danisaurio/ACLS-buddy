@@ -28,8 +28,6 @@ export class EditEventPage implements OnInit {
     console.log(this.eventtoedit)
   }
 
-  selectedEvent(theEvent){
-    console.log(this.eventtoedit.start)
-  }
+
 
 }
