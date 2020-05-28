@@ -1,9 +1,33 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>EditEvent</ion-title>
-  </ion-toolbar>
+  <ion-grid id='headgrid'>
+    <ion-row>
+      <ion-col>
+        <ion-toolbar color = 'lightgray'>
+          <ion-buttons slot="start">
+            <ion-menu-button id='rayitas'></ion-menu-button>
+          </ion-buttons>
+          <ion-title id='title' class="ion-text-start"><b>Edit Event</b></ion-title>
+        </ion-toolbar>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      Name:
+    </ion-col>
+    <ion-col>
+      <ion-text>{{eventtoedit.start}}</ion-text>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 
 </ion-content>
+
+<ion-footer class="ion-no-border" id ='footer' [translucent]='true'>
+
+</ion-footer>

@@ -3,8 +3,7 @@ import { EventRegisterService } from 'src/app/event-register.service';
 import { AclsService } from 'src/app/acls.service';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
-import { EditEventPage } from './edit-event/edit-event.page';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 
 
@@ -16,8 +15,7 @@ import { Router } from '@angular/router';
 export class HistoryPage implements OnInit {
 
   public valuesArray: Array<{[key: string]: any}>;
-  public editevent: EditEventPage;
-
+  public eventtoedit: any;
 
   constructor(
     public eventregister: EventRegisterService,
@@ -65,8 +63,12 @@ export class HistoryPage implements OnInit {
     await alert.present();
   } 
   async opendetails(p: {[key: string]: any}){
-    console.log(p)
-    await this.route.navigate(['edit-event'])
+    let navigationExtras: NavigationExtras = {
+      state: {
+        user: p
+      }
+    };
+    await this.route.navigate(['edit-event'], navigationExtras)
     
   } 
 
