@@ -3,6 +3,9 @@ import { EventRegisterService } from 'src/app/event-register.service';
 import { AclsService } from 'src/app/acls.service';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
+import { EditEventPage } from './edit-event/edit-event.page';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -12,27 +15,27 @@ import { AlertController } from '@ionic/angular';
 })
 export class HistoryPage implements OnInit {
 
-  public valuesArray: Array<any>;
+  public valuesArray: Array<{[key: string]: any}>;
+  public editevent: EditEventPage;
 
 
   constructor(
     public eventregister: EventRegisterService,
     public acls: AclsService,
     public storage:Storage,
-    public alertController: AlertController
+    public alertController: AlertController,
+    public route:Router,
   ) { }
 
+
   ngOnInit() { 
-    this.valuesArray = new Array<Map<string, any>>();
+    this.valuesArray = new Array<{[key: string]: any}>();
     this.eventregister.storage.forEach((value, key) =>{
       this.valuesArray.unshift(value);
       console.log(value);
     })
   }
-  opendetails(p: Map<string, any>){
-    console.log(p)
-  } 
-  async deleteRegister(p: Map<string, any>){
+  async deleteRegister(p: {[key: string]: any}){
     const alert = await this.alertController.create({
       mode: "ios",
       header: 'Are you sure you want to delete this entry?',
@@ -60,6 +63,11 @@ export class HistoryPage implements OnInit {
       ]
     });
     await alert.present();
+  } 
+  async opendetails(p: {[key: string]: any}){
+    console.log(p)
+    await this.route.navigate(['edit-event'])
+    
   } 
 
 }

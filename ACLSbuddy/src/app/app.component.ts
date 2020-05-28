@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'History',
-      url: '/folder/History',
+      url: '/folder/history',
       icon: 'time'
     },
     {
