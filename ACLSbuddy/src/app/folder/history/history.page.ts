@@ -3,7 +3,7 @@ import { EventRegisterService } from 'src/app/event-register.service';
 import { AclsService } from 'src/app/acls.service';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 
 
 
@@ -22,16 +22,21 @@ export class HistoryPage implements OnInit {
     public acls: AclsService,
     public storage:Storage,
     public alertController: AlertController,
-    public route:Router,
-  ) { }
-
+    public router:Router,
+  ) {}
 
   ngOnInit() { 
+    this.valuesArray = [];
+  }
+
+  ionViewWillEnter(){
     this.valuesArray = [];
     this.eventregister.storage.forEach((value) =>{
       this.valuesArray.unshift(value);
     })
   }
+
+
   async deleteRegister(p: {[key: string]: any}){
     const alert = await this.alertController.create({
       mode: "ios",
@@ -63,7 +68,9 @@ export class HistoryPage implements OnInit {
   removeValue(p: {[key: string]: any}){
     let valuetodelete = p.start
     this.eventregister.storage.remove(valuetodelete.toString());
-    this.valuesArray.splice(this.valuesArray.indexOf(p), 1)
+    if(this.valuesArray !== undefined){
+      this.valuesArray.splice(this.valuesArray.indexOf(p), 1)
+    }
   }
   async opendetails(p: {[key: string]: any}){
     let navigationExtras: NavigationExtras = {
@@ -71,7 +78,7 @@ export class HistoryPage implements OnInit {
         user: p
       }
     };
-    await this.route.navigate(['edit-event'], navigationExtras)
+    await this.router.navigate(['edit-event'], navigationExtras)
     
   } 
 

@@ -101,7 +101,7 @@ export class FolderPage implements OnInit {
             handler: data => {
               this.timerservice.stopTwoMinNotification();
               this.timerservice.stop();
-              const endTime = new Date;
+              const endTime = new Date();
               this.eventregister.rcpEventEnds(endTime);
               this.gatherPatientData();
             }
@@ -146,6 +146,6 @@ export class FolderPage implements OnInit {
       this.aclsService.doseLido = '1 - 1.5 mg/kg';
       this.aclsService.doseAmio = '300 mg bolus';
       this.aclsService.showStopButton = false;
-      this.aclsService.selectedDrug = undefined;
+      this.eventregister.antiarrselected = 'Antiarrhythmic';
         }
   }

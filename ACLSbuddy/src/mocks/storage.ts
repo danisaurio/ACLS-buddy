@@ -1,26 +1,33 @@
 export class MockStorage {
 
+    public date1 = new Date('Thu May 28 2020 15:21:16 GMT-0700 (Pacific Daylight Time)')
+    public date2 = new Date('Thu May 29 2020 15:21:16 GMT-0700 (Pacific Daylight Time)')
+    public date3 = new Date('Thu May 30 2020 15:21:16 GMT-0700 (Pacific Daylight Time)')
+
     private mockstorage: Map<string, any> = new Map<string, any>([
-        ['1ststart', {
-            ['start']: '1ststart',
-            ['end']: '1stend',
-            ['shock']: ['shock1', 'shock2'],
-            ['epi']: ['epi1', 'epi2'],
-            ['antiarr']: ['aarr1', 'aarr2']
+        [this.date1.toString(), {
+            ['start']: this.date1,
+            ['end']: this.date1,
+            ['shock']: [this.date1, this.date1],
+            ['epi']: [this.date1, this.date1],
+            ['antiarr']: [this.date1, this.date1],
+            ['selecteddrug']: ['Amiodarone']
         }],
-        ['2ndstart', {
-            ['start']: '2ndstart',
-            ['end']: '2ndend',
-            ['shock']: ['shock1', 'shock2'],
-            ['epi']: ['epi1', 'epi2'],
-            ['antiarr']: ['aarr1', 'aarr2']
+        [this.date2.toString(), {
+            ['start']: this.date2,
+            ['end']: this.date2,
+            ['shock']: [this.date2, this.date2],
+            ['epi']: [this.date2, this.date2],
+            ['antiarr']: [this.date2, this.date2],
+            ['selecteddrug']: ['Amiodarone']
         }],
-        ['3rdstart', {
-            ['start']: '3rdstart',
-            ['end']: '3rdend',
-            ['shock']: ['shock1', 'shock2'],
-            ['epi']: ['epi1', 'epi2'],
-            ['antiarr']: ['aarr1', 'aarr2']
+        [this.date3.toString(), {
+            ['start']: this.date3,
+            ['end']: this.date3,
+            ['shock']: [this.date3, this.date3],
+            ['epi']: [this.date3, this.date3],
+            ['antiarr']: [this.date3, this.date3],
+            ['selecteddrug']: ['Amiodarone']
         }],
     ]);
 

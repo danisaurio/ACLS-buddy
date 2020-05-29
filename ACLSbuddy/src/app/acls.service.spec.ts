@@ -160,13 +160,13 @@ describe('AclsService', () => {
      beforeEach(()=>{
        service.eventresgister.rcpEventStart(new Date);
      })
-     it ('should set selected drug to amio if string = amio', () =>{
-       service.drugAdmin('amio');
-       expect(service.selectedDrug).toEqual('amio');
+     it ('should set selected drug to amio if string = Amiodarone', () =>{
+       service.drugAdmin('Amiodarone');
+       expect(service.selectedDrug).toEqual('Amiodarone');
      })
-     it ('should set selected drug to lido if string = lido', () =>{
-      service.drugAdmin('lido');
-      expect(service.selectedDrug).toEqual('lido');
+     it ('should set selected drug to Lidocaine if string = Lidocaine', () =>{
+      service.drugAdmin('Lidocaine');
+      expect(service.selectedDrug).toEqual('Lidocaine');
     })
    })
 });

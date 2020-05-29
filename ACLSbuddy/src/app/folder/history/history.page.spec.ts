@@ -40,12 +40,11 @@ describe('HistoryPage', () => {
       expect(component.valuesArray.length).toEqual(2)
     }) 
   })
-  fit('should pass selected event to next page', async(() => {
+  it('should pass selected event to next page', async(() => {
     spyOn(component, 'opendetails')
     let selected = fixture.debugElement.nativeElement.querySelector('ion-label.keys');
     selected.click()
     fixture.detectChanges()
-    expect(selected.textContent).toEqual('3rdstart') 
     expect(component.opendetails).toHaveBeenCalledWith(component.valuesArray[0])
 
   }))

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { EventRegisterService } from 'src/app/event-register.service';
 import { HistoryPage } from '../history.page';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
+import { AclsService } from 'src/app/acls.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-edit-event',
@@ -16,6 +18,8 @@ export class EditEventPage implements OnInit {
     public history: HistoryPage,
     private route: ActivatedRoute, 
     private router: Router,
+    public aclsService: AclsService,
+    public alertController: AlertController,
   ) { 
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras) {
@@ -28,6 +32,24 @@ export class EditEventPage implements OnInit {
     console.log(this.eventtoedit)
   }
 
-
-
+  async deleteButton(){
+    const alert = await this.alertController.create({
+      id: 'deletedataalert',
+      header: "Do you want to delete this entry? This action can't be undone",
+      backdropDismiss: false,
+      buttons: [
+          {
+            text: 'No',
+          }, 
+          {
+            text: 'Yes',
+            handler: async () => {
+              this.history.removeValue(this.eventtoedit)
+              await this.router.navigate(['folder/history'])
+            }
+          }
+        ]
+      })
+      await alert.present();
+      }; 
 }

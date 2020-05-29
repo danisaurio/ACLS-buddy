@@ -1,5 +1,5 @@
 export class MockRouter {
-
+    public date1 = new Date('Thu May 28 2020 15:21:16 GMT-0700 (Pacific Daylight Time)')
     navigate(route, extras){
         
     }
@@ -8,11 +8,12 @@ export class MockRouter {
             extras: {
                 state: {
                     user: {
-                        ['start']: '1ststart',
-                        ['end']: '1stend',
-                        ['shock']: ['shock1', 'shock2'],
-                        ['epi']: ['epi1', 'epi2'],
-                        ['antiarr']: ['aarr1', 'aarr2']
+                        ['start']: this.date1,
+                        ['end']: this.date1,
+                        ['shock']: [this.date1, this.date1],
+                        ['epi']: [this.date1, this.date1],
+                        ['antiarr']: [this.date1, this.date1],
+                        ['selecteddrug']: 'Amiodarone'
                     }
                 }
             },

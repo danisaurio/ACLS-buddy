@@ -17,7 +17,7 @@ export class AclsService {
   public antiArrDose: number = 0;
   public doseLido = '1 - 1.5 mg/kg';
   public doseAmio = '300 mg bolus';
-  public selectedDrug = undefined;
+  public selectedDrug = 'noSelected';
 
 
   constructor(
@@ -158,15 +158,15 @@ export class AclsService {
     if (step === 7){
       this.step8()
     }
-
   }
-  drugAdmin(string){
-    let drugAdminTime = new Date;
-    this.eventresgister.drugEvent(string, drugAdminTime);
-    this.disableButton = true;
-    if (string == 'amio' || string == 'lido'){
-      this.selectedDrug = string;
+  drugAdmin(drug: string){
+    if (drug === 'Amiodarone' || drug === 'Lidocaine'){
+      this.selectedDrug = drug;
+      this.eventresgister.antiarrselected = drug;
     }
+    let drugAdminTime = new Date;
+    this.eventresgister.drugEvent(drug, drugAdminTime);
+    this.disableButton = true;
   }
   shockeableRhythmsStep(step){
     if (step === 3 || step === 5 || step === 7){

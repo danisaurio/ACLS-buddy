@@ -9,6 +9,13 @@
           <ion-title id='title' class="ion-text-start"><b>Edit Event</b></ion-title>
         </ion-toolbar>
       </ion-col>
+      <ion-col size='3' id='coldelete'>
+        <ion-button side='end'
+        (click)= 'deleteButton()'
+        color="danger"
+        size='small'
+        shape="round">Delete</ion-button>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-header>
@@ -18,16 +25,135 @@
 <ion-grid>
   <ion-row>
     <ion-col>
-      Name:
-    </ion-col>
-    <ion-col>
-      <ion-text>{{eventtoedit.start}}</ion-text>
+      <b>RCP Event Information</b>
     </ion-col>
   </ion-row>
+  <ion-row>
+    <ion-col class='text'>
+      Start time:
+    </ion-col>
+    <ion-col size="7">
+      <ion-text>{{eventtoedit.start |  date:'MMM/dd/yyyy, hh:mm:ss aaa'}}</ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class='text'>
+      End time:
+    </ion-col>
+    <ion-col size="7">
+      <ion-text>{{eventtoedit.end.toString() | date:'MMM/dd/yyyy, hh:mm:ss aa'}}</ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class='text'>
+      Shocks ({{eventtoedit.shock.length}}):
+    </ion-col>
+    <ion-col size="7">
+      <ion-text *ngFor="let p of eventtoedit.shock; let i = index">- {{eventtoedit.shock[i].toString() | date: 'hh:mm:ss aa'}}<br></ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class='text'>
+      Epinephrine ({{eventtoedit.epi.length}}):
+    </ion-col>
+    <ion-col size="7">
+      <ion-text *ngFor="let p of eventtoedit.epi; let i = index">- {{eventtoedit.epi[i].toString() | date: 'hh:mm:ss aa'}}<br></ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class='text'>
+      {{eventtoedit.selecteddrug}} ({{eventtoedit.antiarr.length}}):
+    </ion-col>
+    <ion-col size="7">
+      <ion-text *ngFor="let p of eventtoedit.antiarr; let i = index">- {{eventtoedit.antiarr[i].toString() | date: 'hh:mm:ss aa'}}<br></ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <p><b>Patient Information:</b><br>
+      <small>(This information is used to calculate statistics)</small></p>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating" class='inputtxt'>Initials</ion-label>
+        <ion-input maxlength = "5" class='inputtxt'></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating" class='inputtxt'>Age</ion-label>
+        <ion-input maxlength = "3" type = "number" class='inputtxt'></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label>Gender</ion-label>
+        <ion-select placeholder="Select One">
+          <ion-select-option value="female">Female</ion-select-option>
+          <ion-select-option value="male">Male</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label>Race</ion-label>
+        <ion-select placeholder="Select One">
+          <ion-select-option value="caucasian">Caucasian</ion-select-option>
+          <ion-select-option value="native">Native American</ion-select-option>
+          <ion-select-option value="african">African American</ion-select-option>
+          <ion-select-option value="asian">Asian</ion-select-option>
+          <ion-select-option value="islander">Pacific Islander</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label>First arrest rhythm</ion-label>
+        <ion-select placeholder="Select One">
+          <ion-select-option value="vf">VF</ion-select-option>
+          <ion-select-option value="pvt">pVT</ion-select-option>
+          <ion-select-option value="asystole">Asystole</ion-select-option>
+          <ion-select-option value="pea">PEA</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label>Rosc</ion-label>
+        <ion-select placeholder="Select One">
+          <ion-select-option value="roscyes">Yes</ion-select-option>
+          <ion-select-option value="roscno">No</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
 </ion-grid>
 
 </ion-content>
 
-<ion-footer class="ion-no-border" id ='footer' [translucent]='true'>
+<ion-footer class="ion-no-border" id ='footer'>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <ion-button 
+      color="success"
+      expand="block" 
+      shape="round">Save</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 
 </ion-footer>

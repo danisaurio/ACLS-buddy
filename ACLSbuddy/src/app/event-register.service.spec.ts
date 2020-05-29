@@ -23,14 +23,14 @@ describe('EventRegisterService', () => {
     it('should start on an empty partialDict', ()=>{
       let date = new Date
       service.rcpEventStart(date);
-      expect(service.partialDict.start).toBeNull;
+      expect(service.partialDict).toBeNull;
     })
-    it('should end with 5 elements', ()=>{
+    it('should end with 6 elements', ()=>{
       let date = new Date
       service.rcpEventStart(date);
       service.rcpEventEnds(date)
       let partialdictlength = Object.keys(service.partialDict)
-      expect(partialdictlength.length).toEqual(5);
+      expect(partialdictlength.length).toEqual(6);
     })
   })
   it('should register current date', async()=>{
@@ -38,7 +38,7 @@ describe('EventRegisterService', () => {
     service.rcpEventStart(date);
     service.rcpEventEnds(date);
     let partialDictValue = await service.partialDict.start
-    expect(partialDictValue).toEqual(date.toString())
+    expect(partialDictValue).toEqual(date)
   })
   describe('Storage', ()=>{
     it('key must be start time, value must be partialdict', async()=>{

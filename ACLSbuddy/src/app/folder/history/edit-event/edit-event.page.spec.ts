@@ -3,7 +3,7 @@ import { IonicModule } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { EditEventPage } from './edit-event.page';
 import { MockStorage } from 'src/mocks/storage';
-import { HistoryPage } from '../history.page';
+import { HistoryPage } from '../history.page'; 
 import { MockHistory } from 'src/mocks/history';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MockRouter } from 'src/mocks/router';

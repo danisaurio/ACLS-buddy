@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { AclsService } from './acls.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,24 +12,29 @@ export class EventRegisterService {
   public shockDict: Array<Date>;
   public epiDict: Array<Date>;
   public antiarrDict: Array<Date>;
+  public starttime: Date;
+  public antiarrselected: string = 'Antiarrhythmic';
 
   constructor(
     public storage: Storage,
   ) { }
 
   async rcpEventStart(startTime: Date){
+   // this.storage.clear();
     this.partialDict= {};
-    this.shockDict = new Array;
-    this.epiDict = new Array;
-    this.antiarrDict = new Array;
+    this.shockDict = [];
+    this.epiDict = [];
+    this.antiarrDict = [];
+    this.starttime = startTime
     this.eventNameStr = startTime.toString();
   }
   async rcpEventEnds(endTime: Date){
-    this.partialDict['start'] = this.eventNameStr;
+    this.partialDict['start'] = this.starttime;
     this.partialDict['end'] = endTime;
     this.partialDict['shock'] = this.shockDict;
     this.partialDict['epi'] = this.epiDict;
     this.partialDict['antiarr'] = this.antiarrDict;
+    this.partialDict['selecteddrug'] = this.antiarrselected;
     await this.storage.set(this.eventNameStr, this.partialDict);
     this.allevents();
   }
@@ -39,7 +45,7 @@ export class EventRegisterService {
     if (drug === 'epi'){
       this.epiDict.push(drugTime)
     }
-    if(drug === 'amio' || drug === 'lido'){
+    if(drug === 'Amiodarone' || drug === 'Lidocaine'){
       this.antiarrDict.push(drugTime)
     }
   }
