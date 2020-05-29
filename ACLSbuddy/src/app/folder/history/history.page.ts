@@ -16,6 +16,7 @@ export class HistoryPage implements OnInit {
 
   public valuesArray: Array<{[key: string]: any}>;
   public eventtoedit: any;
+  public entrycontrol = 0;
 
   constructor(
     public eventregister: EventRegisterService,
@@ -66,11 +67,11 @@ export class HistoryPage implements OnInit {
     await alert.present();
   } 
   removeValue(p: {[key: string]: any}){
-    let valuetodelete = p.start
-    this.eventregister.storage.remove(valuetodelete.toString());
+    this.eventregister.removeWholeEvent(p)
     if(this.valuesArray !== undefined){
       this.valuesArray.splice(this.valuesArray.indexOf(p), 1)
     }
+
   }
   async opendetails(p: {[key: string]: any}){
     let navigationExtras: NavigationExtras = {

@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { EventRegisterService } from 'src/app/event-register.service';
-import { HistoryPage } from '../history.page';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AclsService } from 'src/app/acls.service';
 import { AlertController } from '@ionic/angular';
@@ -12,14 +11,21 @@ import { AlertController } from '@ionic/angular';
 })
 export class EditEventPage implements OnInit {
   public eventtoedit: any;
+  public initials: string
+  public age: number;
+  public gender: string;
+  public race: string;
+  public rhythm: string;
+  public rosc: string;
+
 
   constructor(
     public eventregister: EventRegisterService,
-    public history: HistoryPage,
     private route: ActivatedRoute, 
     private router: Router,
     public aclsService: AclsService,
     public alertController: AlertController,
+    public htmlelement: ElementRef,
   ) { 
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras) {
@@ -29,7 +35,13 @@ export class EditEventPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.eventtoedit)
+    this.initials = this.eventtoedit.initials
+    this.age = this.eventtoedit.age
+    this.gender = this.eventtoedit.gender
+    this.race = this.eventtoedit.race
+    this.rhythm = this.eventtoedit.rhythm
+    this.rosc = this.eventtoedit.rosc
+
   }
 
   async deleteButton(){
@@ -44,7 +56,7 @@ export class EditEventPage implements OnInit {
           {
             text: 'Yes',
             handler: async () => {
-              this.history.removeValue(this.eventtoedit)
+              this.eventregister.removeWholeEvent(this.eventtoedit)
               await this.router.navigate(['folder/history'])
             }
           }
@@ -52,4 +64,8 @@ export class EditEventPage implements OnInit {
       })
       await alert.present();
       }; 
+
+  saveButton(){
+    console.log('savebutton')
+  }
 }

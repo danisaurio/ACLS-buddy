@@ -78,7 +78,7 @@
     <ion-col>
       <ion-item>
         <ion-label position="floating" class='inputtxt'>Initials</ion-label>
-        <ion-input maxlength = "5" class='inputtxt'></ion-input>
+        <ion-input maxlength = "5" [(ngModel)]="initials"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -86,7 +86,7 @@
     <ion-col>
       <ion-item>
         <ion-label position="floating" class='inputtxt'>Age</ion-label>
-        <ion-input maxlength = "3" type = "number" class='inputtxt'></ion-input>
+        <ion-input maxlength = "3" type = "number" [(ngModel)]="age"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -94,7 +94,7 @@
     <ion-col>
       <ion-item>
         <ion-label>Gender</ion-label>
-        <ion-select placeholder="Select One">
+        <ion-select placeholder="Select One" [(ngModel)]="gender">
           <ion-select-option value="female">Female</ion-select-option>
           <ion-select-option value="male">Male</ion-select-option>
         </ion-select>
@@ -105,7 +105,7 @@
     <ion-col>
       <ion-item>
         <ion-label>Race</ion-label>
-        <ion-select placeholder="Select One">
+        <ion-select placeholder="Select One" [(ngModel)]="race">
           <ion-select-option value="caucasian">Caucasian</ion-select-option>
           <ion-select-option value="native">Native American</ion-select-option>
           <ion-select-option value="african">African American</ion-select-option>
@@ -119,7 +119,7 @@
     <ion-col>
       <ion-item>
         <ion-label>First arrest rhythm</ion-label>
-        <ion-select placeholder="Select One">
+        <ion-select placeholder="Select One" [(ngModel)]="rhythm">
           <ion-select-option value="vf">VF</ion-select-option>
           <ion-select-option value="pvt">pVT</ion-select-option>
           <ion-select-option value="asystole">Asystole</ion-select-option>
@@ -132,7 +132,7 @@
     <ion-col>
       <ion-item>
         <ion-label>Rosc</ion-label>
-        <ion-select placeholder="Select One">
+        <ion-select placeholder="Select One" [(ngModel)]="rosc">
           <ion-select-option value="roscyes">Yes</ion-select-option>
           <ion-select-option value="roscno">No</ion-select-option>
         </ion-select>
@@ -149,6 +149,7 @@
   <ion-row>
     <ion-col>
       <ion-button 
+      (click) = "saveButton()"
       color="success"
       expand="block" 
       shape="round">Save</ion-button>

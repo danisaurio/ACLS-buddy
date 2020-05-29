@@ -13,7 +13,13 @@ export class MockRouter {
                         ['shock']: [this.date1, this.date1],
                         ['epi']: [this.date1, this.date1],
                         ['antiarr']: [this.date1, this.date1],
-                        ['selecteddrug']: 'Amiodarone'
+                        ['selecteddrug']: 'Amiodarone',
+                        ['initials']:'',
+                        ['age']:'',
+                        ['gender']:'',
+                        ['race']:'',
+                        ['rhythm']:'',
+                        ['rosc']:'',
                     }
                 }
             },

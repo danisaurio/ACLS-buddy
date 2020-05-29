@@ -39,7 +39,7 @@ export class EventRegisterService {
     this.partialDict['age']='';
     this.partialDict['gender']='';
     this.partialDict['race']='';
-    this.partialDict['1strhythm']='';
+    this.partialDict['rhythm']='';
     this.partialDict['rosc']='';
     await this.storage.set(this.eventNameStr, this.partialDict);
     this.allevents();
@@ -58,6 +58,9 @@ export class EventRegisterService {
   async allevents(){
     console.log(await this.storage.get(this.eventNameStr));
 
+  }
+  removeWholeEvent(event){
+    this.storage.remove(event.start.toString())
   }
 
 }

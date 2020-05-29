@@ -16,7 +16,7 @@ export class MockStorage {
             ['age']:'',
             ['gender']:'',
             ['race']:'',
-            ['1strhythm']:'',
+            ['rhythm']:'',
             ['rosc']:'',
 
         }],
@@ -31,7 +31,7 @@ export class MockStorage {
             ['age']:'',
             ['gender']:'',
             ['race']:'',
-            ['1strhythm']:'',
+            ['rhythm']:'',
             ['rosc']:'',
         }],
         [this.date3.toString(), {
@@ -45,7 +45,7 @@ export class MockStorage {
             ['age']:'',
             ['gender']:'',
             ['race']:'',
-            ['1strhythm']:'',
+            ['rhythm']:'',
             ['rosc']:'',
         }],
     ]);

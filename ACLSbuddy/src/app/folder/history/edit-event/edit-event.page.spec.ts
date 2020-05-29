@@ -3,8 +3,6 @@ import { IonicModule } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { EditEventPage } from './edit-event.page';
 import { MockStorage } from 'src/mocks/storage';
-import { HistoryPage } from '../history.page'; 
-import { MockHistory } from 'src/mocks/history';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MockRouter } from 'src/mocks/router';
 import { MockActivatedRoute } from 'src/mocks/activatedroute';
@@ -19,7 +17,6 @@ describe('EditEventPage', () => {
       imports: [IonicModule.forRoot()],
       providers: [
         { provide: Storage, useClass: MockStorage },
-        { provide: HistoryPage, useClass: MockHistory },
         { provide: Router, useClass: MockRouter },
         { provide: ActivatedRoute, useClass: MockActivatedRoute }
       ]
@@ -35,7 +32,7 @@ describe('EditEventPage', () => {
   });
 
   it('should populate html data with selected event info', async()=> {
-    fixture.autoDetectChanges 
+    fixture.detectChanges() 
     let htmlstart = fixture.debugElement.nativeElement.querySelector('ion-text#start');
     let htmlend = fixture.debugElement.nativeElement.querySelector('ion-text#end');
     expect(htmlstart.textContent).toEqual('May/28/2020, 03:21:16 PM');
