@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Statistics',
-      url: '/folder/Statistics',
+      url: '/folder/statistics',
       icon: 'stats-chart'
     }
   ];

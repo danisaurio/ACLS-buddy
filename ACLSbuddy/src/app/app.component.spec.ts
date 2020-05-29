@@ -63,7 +63,7 @@ describe('AppComponent', () => {
     expect(menuItems.length).toEqual(3);
     expect(menuItems[0].getAttribute('ng-reflect-router-link')).toEqual('/folder/CPR');
     expect(menuItems[1].getAttribute('ng-reflect-router-link')).toEqual('/folder/history');
-    expect(menuItems[2].getAttribute('ng-reflect-router-link')).toEqual('/folder/Statistics');
+    expect(menuItems[2].getAttribute('ng-reflect-router-link')).toEqual('/folder/statistics');
   });
 
 });

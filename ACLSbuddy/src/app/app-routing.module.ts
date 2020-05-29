@@ -13,6 +13,10 @@ const routes: Routes = [
     loadChildren: () => import('./folder/history/history.module').then( m => m.HistoryPageModule)
   },
   {
+    path: 'folder/statistics',
+    loadChildren: () => import('./statistics/statistics/statistics.module').then( m => m.StatisticsPageModule)
+  },
+  {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
@@ -20,6 +24,7 @@ const routes: Routes = [
     path: 'edit-event',
     loadChildren: () => import('./folder/history/edit-event/edit-event.module').then( m => m.EditEventPageModule)
   },
+
 ];
 
 @NgModule({
