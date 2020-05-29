@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventRegisterService } from 'src/app/event-register.service';
 import { HistoryPage } from '../history.page';
-import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AclsService } from 'src/app/acls.service';
 import { AlertController } from '@ionic/angular';
 

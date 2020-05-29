@@ -32,19 +32,22 @@ describe('HistoryPage', () => {
   describe('valuesArray', ()=>{
     it('should be the same size as storage', async() => {
       component.ngOnInit()
+      component.ionViewWillEnter()
       expect(component.valuesArray.length).toEqual(3)
     })
     it('should have size-1 after delete', () => {
       component.ngOnInit()
+      component.ionViewWillEnter()
       component.removeValue(component.valuesArray[0]) 
       expect(component.valuesArray.length).toEqual(2)
     }) 
   })
   it('should pass selected event to next page', async(() => {
     spyOn(component, 'opendetails')
+    component.ionViewWillEnter()
+    fixture.detectChanges()
     let selected = fixture.debugElement.nativeElement.querySelector('ion-label.keys');
     selected.click()
-    fixture.detectChanges()
     expect(component.opendetails).toHaveBeenCalledWith(component.valuesArray[0])
 
   }))

@@ -35,6 +35,12 @@ export class EventRegisterService {
     this.partialDict['epi'] = this.epiDict;
     this.partialDict['antiarr'] = this.antiarrDict;
     this.partialDict['selecteddrug'] = this.antiarrselected;
+    this.partialDict['initials'] ='';
+    this.partialDict['age']='';
+    this.partialDict['gender']='';
+    this.partialDict['race']='';
+    this.partialDict['1strhythm']='';
+    this.partialDict['rosc']='';
     await this.storage.set(this.eventNameStr, this.partialDict);
     this.allevents();
   }

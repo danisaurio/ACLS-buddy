@@ -33,7 +33,7 @@
       Start time:
     </ion-col>
     <ion-col size="7">
-      <ion-text>{{eventtoedit.start |  date:'MMM/dd/yyyy, hh:mm:ss aaa'}}</ion-text>
+      <ion-text id='start'>{{eventtoedit.start |  date:'MMM/dd/yyyy, hh:mm:ss aaa'}}</ion-text>
     </ion-col>
   </ion-row>
   <ion-row>
@@ -41,7 +41,7 @@
       End time:
     </ion-col>
     <ion-col size="7">
-      <ion-text>{{eventtoedit.end.toString() | date:'MMM/dd/yyyy, hh:mm:ss aa'}}</ion-text>
+      <ion-text id='end'>{{eventtoedit.end.toString() | date:'MMM/dd/yyyy, hh:mm:ss aa'}}</ion-text>
     </ion-col>
   </ion-row>
   <ion-row>

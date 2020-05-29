@@ -33,4 +33,20 @@ describe('EditEventPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should populate html data with selected event info', async()=> {
+    fixture.autoDetectChanges 
+    let htmlstart = fixture.debugElement.nativeElement.querySelector('ion-text#start');
+    let htmlend = fixture.debugElement.nativeElement.querySelector('ion-text#end');
+    expect(htmlstart.textContent).toEqual('May/28/2020, 03:21:16 PM');
+    expect(htmlend.textContent).toEqual('May/28/2020, 03:21:16 PM');
+
+  })
+
+  it('delete button should delete 1 value', async() => {
+    let todelete = component.eventtoedit.start
+    component.eventregister.storage.remove(todelete.toString())
+    expect(await component.eventregister.storage.length()).toEqual(2)
+  })
+
 });

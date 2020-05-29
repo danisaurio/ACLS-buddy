@@ -11,7 +11,14 @@ export class MockStorage {
             ['shock']: [this.date1, this.date1],
             ['epi']: [this.date1, this.date1],
             ['antiarr']: [this.date1, this.date1],
-            ['selecteddrug']: ['Amiodarone']
+            ['selecteddrug']: ['Amiodarone'],
+            ['initials']:'',
+            ['age']:'',
+            ['gender']:'',
+            ['race']:'',
+            ['1strhythm']:'',
+            ['rosc']:'',
+
         }],
         [this.date2.toString(), {
             ['start']: this.date2,
@@ -19,7 +26,13 @@ export class MockStorage {
             ['shock']: [this.date2, this.date2],
             ['epi']: [this.date2, this.date2],
             ['antiarr']: [this.date2, this.date2],
-            ['selecteddrug']: ['Amiodarone']
+            ['selecteddrug']: ['Amiodarone'],
+            ['initials']:'',
+            ['age']:'',
+            ['gender']:'',
+            ['race']:'',
+            ['1strhythm']:'',
+            ['rosc']:'',
         }],
         [this.date3.toString(), {
             ['start']: this.date3,
@@ -27,7 +40,13 @@ export class MockStorage {
             ['shock']: [this.date3, this.date3],
             ['epi']: [this.date3, this.date3],
             ['antiarr']: [this.date3, this.date3],
-            ['selecteddrug']: ['Amiodarone']
+            ['selecteddrug']: ['Amiodarone'],
+            ['initials']:'',
+            ['age']:'',
+            ['gender']:'',
+            ['race']:'',
+            ['1strhythm']:'',
+            ['rosc']:'',
         }],
     ]);
 
@@ -44,6 +63,9 @@ export class MockStorage {
     }
     remove(key: string){
         this.mockstorage.delete(key);
+    }
+    length(){
+        return this.mockstorage.size;
     }
 
 }
