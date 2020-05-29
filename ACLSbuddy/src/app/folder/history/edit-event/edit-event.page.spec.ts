@@ -46,4 +46,10 @@ describe('EditEventPage', () => {
     expect(await component.eventregister.storage.length()).toEqual(2)
   })
 
+  it('should update values on save', () => {
+    component.age = 100
+    component.saveButton()
+    expect(component.eventtoedit.age).toEqual(100)
+  })
+
 });
