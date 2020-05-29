@@ -41,8 +41,8 @@ export class EventRegisterService {
     this.partialDict['race']='';
     this.partialDict['rhythm']='';
     this.partialDict['rosc']='';
+    this.partialDict['key'] = this.eventNameStr
     await this.storage.set(this.eventNameStr, this.partialDict);
-    this.allevents();
   }
   schockEvent(shockTime: Date){
     this.shockDict.push(shockTime)
@@ -55,12 +55,11 @@ export class EventRegisterService {
       this.antiarrDict.push(drugTime)
     }
   }
-  async allevents(){
-    console.log(await this.storage.get(this.eventNameStr));
-
-  }
   removeWholeEvent(event){
     this.storage.remove(event.start.toString())
+  }
+  async returnStorgeEntry(){
+    return this.storage.get(this.eventNameStr)
   }
 
 }

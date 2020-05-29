@@ -18,6 +18,7 @@ export class MockStorage {
             ['race']:'',
             ['rhythm']:'',
             ['rosc']:'',
+            ['key']:this.date1.toString(),
 
         }],
         [this.date2.toString(), {
@@ -33,6 +34,7 @@ export class MockStorage {
             ['race']:'',
             ['rhythm']:'',
             ['rosc']:'',
+            ['key']:this.date2.toString(),
         }],
         [this.date3.toString(), {
             ['start']: this.date3,
@@ -47,6 +49,7 @@ export class MockStorage {
             ['race']:'',
             ['rhythm']:'',
             ['rosc']:'',
+            ['key']:this.date3.toString(),
         }],
     ]);
 

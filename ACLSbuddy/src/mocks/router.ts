@@ -20,6 +20,7 @@ export class MockRouter {
                         ['race']:'',
                         ['rhythm']:'',
                         ['rosc']:'',
+                        ['key']:this.date1.toString(),
                     }
                 }
             },

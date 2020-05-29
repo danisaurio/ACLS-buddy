@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { AclsService } from '../acls.service';
 import { TimerService } from '../timer.service';
 import { AlertController } from '@ionic/angular';
@@ -20,50 +20,49 @@ export class FolderPage implements OnInit {
     public aclsService: AclsService, 
     public timerservice:TimerService,
     public eventregister: EventRegisterService,
+    public router: Router,
     ) { }
 
-  ngOnInit() {
-    this.folder = this.activatedRoute.snapshot.paramMap.get('id');
-    this.aclsService.askRhythm.subscribe(() => {
-        this.askRhythm();
-    });
-    this.aclsService.step12input.subscribe(() => {
-        this.rosc();
-    });
-  }
-
-  start() {
-    this.timerservice.start();
-    this.askRhythm();
-    this.aclsService.showStopButton = true;
-    const startTime = new Date;
-    this.eventregister.rcpEventStart(startTime);
-  }
-
-  async askRhythm() {
-    const alert = await this.alertController.create({
-      id: 'askRhythmAlert',
-      mode: "ios",
-      header: 'Is the rhythm shockeable?',
-      message: '- Yes: VF or pVT<br>- No: Asystole or PEA',
-      backdropDismiss: false,
-      buttons: [
-        {
-          text: 'YES',
-          handler: data => {
-            this.aclsService.decision('isShockeable');
+    ngOnInit() {
+      this.folder = this.activatedRoute.snapshot.paramMap.get('id');
+      this.aclsService.askRhythm.subscribe(() => {
+          this.askRhythm();
+      });
+      this.aclsService.step12input.subscribe(() => {
+          this.rosc();
+      });
+    }
+    start() {
+      this.timerservice.start();
+      this.askRhythm();
+      this.aclsService.showStopButton = true;
+      const startTime = new Date;
+      this.eventregister.rcpEventStart(startTime);
+    }
+    async askRhythm() {
+      const alert = await this.alertController.create({
+        id: 'askRhythmAlert',
+        mode: "ios",
+        header: 'Is the rhythm shockeable?',
+        message: '- Yes: VF or pVT<br>- No: Asystole or PEA',
+        backdropDismiss: false,
+        buttons: [
+          {
+            text: 'YES',
+            handler: data => {
+              this.aclsService.decision('isShockeable');
+            }
+          },
+          {
+            text: 'NO',
+            handler: data => {
+              this.aclsService.decision('isNotShockeable');
+            }
           }
-        },
-        {
-          text: 'NO',
-          handler: data => {
-            this.aclsService.decision('isNotShockeable');
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
+        ]
+      });
+      await alert.present();
+    }
     async rosc() {
       const alert = await this.alertController.create({
         id: 'roscAlert',
@@ -98,11 +97,11 @@ export class FolderPage implements OnInit {
         buttons: [
           {
             text: 'YES',
-            handler: data => {
+            handler: async() => {
               this.timerservice.stopTwoMinNotification();
               this.timerservice.stop();
               const endTime = new Date();
-              this.eventregister.rcpEventEnds(endTime);
+              await this.eventregister.rcpEventEnds(endTime);
               this.gatherPatientData();
             }
           },
@@ -124,21 +123,20 @@ export class FolderPage implements OnInit {
               text: 'No',
               handler: () => {
                 this.restartValues();
-                console.log('Confirm Cancel');
               }
             }, {
               text: 'Yes',
               handler: () => {
                 this.restartValues();
-                console.log('Confirm Ok');
+                this.editInformationInmediately();
               }
             }
           ]
         
         })
           await alert.present();
-        }; 
-    
+    } 
+
     restartValues(){
       this.timerservice.time = "00:00.000";
       this.aclsService.step=0;
@@ -147,5 +145,15 @@ export class FolderPage implements OnInit {
       this.aclsService.doseAmio = '300 mg bolus';
       this.aclsService.showStopButton = false;
       this.eventregister.antiarrselected = 'Antiarrhythmic';
+    }
+    async editInformationInmediately(){
+      let event = await this.eventregister.returnStorgeEntry()
+      let navigationExtras: NavigationExtras = {
+        state: {
+          user: event
         }
+      };
+      await this.router.navigate(['edit-event'], navigationExtras)
+    }
   }
+  

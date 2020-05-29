@@ -14,7 +14,7 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 })
 export class HistoryPage implements OnInit {
 
-  public valuesArray: Array<{[key: string]: any}>;
+  public valuesArray: Array<{[key: string]: any}> = [];
   public eventtoedit: any;
   public entrycontrol = 0;
 
@@ -27,11 +27,11 @@ export class HistoryPage implements OnInit {
   ) {}
 
   ngOnInit() { 
-    this.valuesArray = [];
+    this.valuesArray = []
   }
 
   ionViewWillEnter(){
-    this.valuesArray = [];
+    this.valuesArray = []
     this.eventregister.storage.forEach((value) =>{
       this.valuesArray.unshift(value);
     })

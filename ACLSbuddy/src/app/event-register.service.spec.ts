@@ -30,7 +30,7 @@ describe('EventRegisterService', () => {
       service.rcpEventStart(date);
       service.rcpEventEnds(date)
       let partialdictlength = Object.keys(service.partialDict)
-      expect(partialdictlength.length).toEqual(12);
+      expect(partialdictlength.length).toEqual(13);
     })
   })
   it('should register current date', async()=>{

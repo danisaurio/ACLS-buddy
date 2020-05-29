@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AclsService } from 'src/app/acls.service';
 import { AlertController } from '@ionic/angular';
 
+
 @Component({
   selector: 'app-edit-event',
   templateUrl: './edit-event.page.html',
@@ -74,8 +75,8 @@ export class EditEventPage implements OnInit {
     this.eventtoedit.rhythm = this.rhythm
     this.eventtoedit.rosc =this.rosc
 
-    let startkey = this.eventtoedit.start
-    this.eventregister.storage.set(startkey.toString(), this.eventtoedit)
+    await this.eventregister.storage.set(this.eventtoedit.key, this.eventtoedit)
     await this.router.navigate(['folder/history'])
+
   }
 }
