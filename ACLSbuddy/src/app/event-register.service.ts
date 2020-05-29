@@ -26,7 +26,7 @@ export class EventRegisterService {
     this.epiDict = [];
     this.antiarrDict = [];
     this.starttime = startTime
-    this.eventNameStr = startTime.toString();
+    this.eventNameStr = this.starttime.toString();
   }
   async rcpEventEnds(endTime: Date){
     this.partialDict['start'] = this.starttime;

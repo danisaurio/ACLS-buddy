@@ -65,7 +65,17 @@ export class EditEventPage implements OnInit {
       await alert.present();
       }; 
 
-  saveButton(){
-    console.log('savebutton')
+  async saveButton(){
+
+    this.eventtoedit.initials =  this.initials
+    this.eventtoedit.age = this.age
+    this.eventtoedit.gender = this.gender
+    this.eventtoedit.race = this.race
+    this.eventtoedit.rhythm = this.rhythm
+    this.eventtoedit.rosc =this.rosc
+
+    let startkey = this.eventtoedit.start
+    this.eventregister.storage.set(startkey.toString(), this.eventtoedit)
+    await this.router.navigate(['folder/history'])
   }
 }
