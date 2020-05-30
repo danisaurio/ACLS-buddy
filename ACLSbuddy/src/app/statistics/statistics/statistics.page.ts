@@ -134,9 +134,9 @@ export class StatisticsPage{
     let race = new Chart(await this.raceChart.nativeElement, {
       type: 'pie',
       data: {
-        labels: ['Caucasian', 'Native American', 'African American', 'Asian', 'Pacific Islander'],
+        labels: ['Caucasian', 'Native American', 'African American', 'Asian', 'Pacific Islander', 'unespecified'],
         datasets: [{
-          data: this.getRaceFrecuency(),
+          data: await this.getRaceFrecuency(),
           backgroundColor: this.colorArray, 
           borderColor: 'rgb(38, 194, 129)',
           borderWidth: 1
@@ -149,7 +149,7 @@ export class StatisticsPage{
       data: {
         labels: ['VF', 'pVT', 'Asystole', 'PEA'],
         datasets: [{
-          data: this.getRhythmFrecuency(),
+          data: await this.getRhythmFrecuency(),
           backgroundColor: this.colorArray, 
           borderColor: 'rgb(38, 194, 129)',
           borderWidth: 1
@@ -162,7 +162,7 @@ export class StatisticsPage{
       data: {
         labels: ['Yes', 'No'],
         datasets: [{
-          data: this.getRoscFrecuency(),
+          data: await this.getRoscFrecuency(),
           backgroundColor: this.colorArray, 
           borderColor: 'rgb(38, 194, 129)',
           borderWidth: 1
@@ -186,34 +186,24 @@ export class StatisticsPage{
         switch(decValue){
           case 0:
             yearsarray[0].push(decValue);
-            break;
           case 1:
             yearsarray[0].push(decValue);
-            break;
           case 2:
             yearsarray[1].push(decValue);
-            break;
           case 3:
             yearsarray[2].push(decValue);
-            break;
           case 4:
             yearsarray[3].push(decValue);
-            break;
           case 5:
             yearsarray[4].push(decValue);
-            break;
           case 6:
             yearsarray[5].push(decValue);
-            break;
           case 7:
             yearsarray[6].push(decValue);
-            break;
           case 8:
             yearsarray[7].push(decValue);
-            break;
           default:
             yearsarray[8].push(decValue);
-            break;
         }
       }
     })
@@ -232,28 +222,83 @@ export class StatisticsPage{
   }
 
   async getGenderFrecuency(){
-    let men = []
-    let women = []
-    let unespecified = []
-    await this.storage.forEach((value => {
-      if(value.gender === 'female'){
-        women.push(value.gender)
-      }
-      else if(value.gender === 'male'){
-        men.push(value.gender)
-      }
-      else{
-        unespecified.push(value.gender)
-      }
-    }))
-    console.log(unespecified)
-    return [women.length, men.length, unespecified.length]
+    // let genders = [[],[],[]]
+    // await this.storage.forEach(value => {
+    //   switch(value.gender){
+    //     case 'female':
+    //       genders[0].push(value.gender)
+    //     case 'male':
+    //       genders[1].push(value.gender)
+    //     default:
+    //       genders[2].push(value.gender)
+    //   }
+    // })
+    // let genderfrecuency = []
+    // genderfrecuency.push(genders[0].length)
+    // genderfrecuency.push(genders[1].length)
+    // genderfrecuency.push(genders[2].length)
+    // return genderfrecuency
+    const count = {
+      'female':0,
+      'male':0,
+      '':0
+    }
+    await this.storage.forEach( value => {
+      count[value.gender] += 1
+    })
+    return Object.values(count)
   }
-  getRaceFrecuency(){
-    return[1,3,3,6,7]
+  async getRaceFrecuency(){
+    let races = [[],[],[],[],[],[],[]] 
+    await this.storage.forEach(value =>{
+      switch(value.race){
+        case 'caucasian':
+          races[0].push(value.race)
+        case 'native':
+          races[1].push(value.race)
+        case 'african':
+          races[2].push(value.race)
+        case 'asian':
+          races[3].push(value.race)
+        case 'islander':
+          races[4].push(value.race)
+        default:
+          races[5].push(value.race)
+      }
+    })
+    let racesfrecuency=[]
+    racesfrecuency.push(races[0].length)
+    racesfrecuency.push(races[1].length)
+    racesfrecuency.push(races[2].length)
+    racesfrecuency.push(races[3].length)
+    racesfrecuency.push(races[4].length)
+    racesfrecuency.push(races[5].length)
+    return racesfrecuency
   }
-  getRhythmFrecuency(){
-    return[1,3,3,7]
+  async getRhythmFrecuency(){
+    let rhythm = [[],[],[],[],[]] 
+    await this.storage.forEach(value =>{
+      switch(value.rhythm){
+        case 'vf':
+          rhythm[0].push(value.rhythm)
+        case 'pvt':
+          rhythm[1].push(value.rhythm)
+        case 'asystole':
+          rhythm[2].push(value.rhythm)
+        case 'pea':
+          rhythm[3].push(value.rhythm)
+        default:
+          rhythm[4].push(value.rhythm)
+      }
+    })
+    let rhythmfrecuency=[]
+    rhythmfrecuency.push(rhythm[0].length)
+    rhythmfrecuency.push(rhythm[1].length)
+    rhythmfrecuency.push(rhythm[2].length)
+    rhythmfrecuency.push(rhythm[3].length)
+    rhythmfrecuency.push(rhythm[4].length)
+    rhythmfrecuency.push(rhythm[5].length)
+    return rhythmfrecuency
   }
   getRoscFrecuency(){
     return[4,7]
