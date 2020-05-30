@@ -18,7 +18,7 @@ export class StatisticsPage{
 
   
   public info: boolean = false;
-  public registers: boolean = true;
+  public personal: boolean = true;
   public statistics: boolean = true;
   public national: boolean = true;
   public colorArray: any;
@@ -26,31 +26,21 @@ export class StatisticsPage{
   constructor() {}
 
   ionViewDidEnter() {
+    this.generateColorArray(8)
     this.createRegistersChart();
     this.createPersonalChart();
   }
 
   selectChart(selectedChart: string){
-    if (selectedChart === 'registers'){
-      this.info = true;
-      this.registers = false;
-      this.statistics = true;
-      this.national = true;
-      this.createRegistersChart()
-    }
     if (selectedChart === 'personal'){
       this.info = true;
-      this.registers = true;
-      this.statistics = false;
+      this.personal = false;
       this.national = true;
-      this.createPersonalChart()
     }
     if (selectedChart === 'national'){
       this.info = true;
-      this.registers = true;
-      this.statistics = true;
-      this.national = false; 
-      this.createNationalChart()   
+      this.personal = true;
+      this.national = false;   
     }
   }
 
@@ -62,7 +52,6 @@ export class StatisticsPage{
   }
 
   async createRegistersChart() {
-    this.generateColorArray(2)
     let registers = new Chart(await this.registerChart.nativeElement, {
       type: 'pie',
       data: {
@@ -92,13 +81,22 @@ export class StatisticsPage{
       data: {
         labels: this.getAges(),
         datasets: [{
+          label: 'Number of patients',
           data: this.getAgesFrecuency(),
           backgroundColor: this.colorArray, 
           borderColor: 'rgb(38, 194, 129)',
           borderWidth: 1
         }]
       },
-      options: {}
+      options: {
+        scales: {
+          yAxes: [{
+              ticks: {
+                  stepSize: 1
+              }
+          }]
+      }
+      }
     });
     let gender = new Chart(await this.genderChart.nativeElement, {
       type: 'pie',
@@ -155,10 +153,10 @@ export class StatisticsPage{
   }
 
   getAges(){
-    return [30, 40, 53, 60]
+    return ['30 years', '40 years', '53 years', '60 years']
   }
   getAgesFrecuency(){
-    return[5,3,6,1]
+    return[5,5,5,5]
   }
   getGenderFrecuency(){
     return [5,7]
@@ -171,6 +169,12 @@ export class StatisticsPage{
   }
   getRoscFrecuency(){
     return[4,7]
+  }
+  getSurvivalRate(){
+    let survivals = this.getRoscFrecuency()[0]
+    let deaths = this.getRoscFrecuency()[1]
+    let rate = (survivals*100)/(survivals+deaths)
+    return rate.toFixed(2)
   }
 
   createNationalChart(){
