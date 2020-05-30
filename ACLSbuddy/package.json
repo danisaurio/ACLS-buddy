@@ -27,6 +27,7 @@
     "@ionic/storage": "^2.2.0",
     "@types/chart.js": "^2.9.21",
     "chart.js": "^2.9.3",
+    "chartjs-plugin-piechart-outlabels": "^0.1.4",
     "cordova-sqlite-storage": "^5.0.0",
     "ionic-log-file-appender": "^2.0.7",
     "rxjs": "~6.5.1",
