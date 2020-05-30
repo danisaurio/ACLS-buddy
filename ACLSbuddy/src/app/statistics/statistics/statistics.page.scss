@@ -39,5 +39,26 @@
   #headgrid{
     background-color: black;
   }
+  ion-select{
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  ion-card{
+    background-color: white;
+  }
+  ion-tabs{
+    --ion-background-color: black
+  }
+  ion-icon, ion-label{
+    color: white
+  }
+
+  #infotxt{
+    font-size: larger;
+    color: lightgray;
+  }
+  #content{
+    text-align: center;
+  }
 
   

@@ -13,8 +13,8 @@ import { StatisticsPage } from './statistics.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    StatisticsPageRoutingModule
+    StatisticsPageRoutingModule,
   ],
-  declarations: [StatisticsPage]
+  declarations: [StatisticsPage],
 })
 export class StatisticsPageModule {}

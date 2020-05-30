@@ -1,3 +1,4 @@
+
 <ion-header>
   <ion-grid id='headgrid'>
     <ion-row>
@@ -13,12 +14,41 @@
   </ion-grid>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" id='content'>
+  <ion-text id = "infotxt" [hidden] = "!hide">Please select information to Display</ion-text>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card class="welcome-card" [hidden] = "hide">
+          <ion-card-header>
+            <ion-card-title>Available registers</ion-card-title>
+            <ion-card-subtitle>Comparison over the total number of registers and their information</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <canvas #barChart></canvas>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-<ion-text>holaaaaa</ion-text>
-
+  <ion-tabs id='tabs'>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button (click)= 'registersChart()'>
+        <ion-icon name="person"></ion-icon>
+        <ion-label>Registers</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button>
+        <ion-icon name="calculator"></ion-icon>
+        <ion-label>Personal Percentages</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button>
+        <ion-icon name="globe"></ion-icon>
+        <ion-label>National rates</ion-label>
+      </ion-tab-button>
+  
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-content>
-
-<ion-footer class="ion-no-border" id ='footer' [translucent]='true'>
-
-</ion-footer>
