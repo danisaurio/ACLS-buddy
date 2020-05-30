@@ -21,14 +21,14 @@ export class StatisticsPage{
   public personal: boolean = true;
   public statistics: boolean = true;
   public national: boolean = true;
-  public colorArray: any;
+  public colorArray: any = [];
 
   constructor() {}
 
   ionViewDidEnter() {
-    this.generateColorArray(8)
     this.createRegistersChart();
     this.createPersonalChart();
+    this.generateColorArray()
   }
 
   selectChart(selectedChart: string){
@@ -44,11 +44,19 @@ export class StatisticsPage{
     }
   }
 
-  generateColorArray(num) {
-    this.colorArray = [];
-    for (let i = 0; i < num; i++) {
-      this.colorArray.push('#' + Math.floor(Math.random() * 16777215).toString(16));
-    }
+  generateColorArray() {
+    this.colorArray.push('rgb(0,139,139)')
+    this.colorArray.push('rgb(40,162,40)')
+    this.colorArray.push('rgb(36,161,89)')
+    this.colorArray.push('rgb(1,152,117)')
+    this.colorArray.push('rgb(109,136,145)')
+    this.colorArray.push('rgb(52,56,94)')
+    this.colorArray.push('rgb(75,119,190)')
+    this.colorArray.push('rgb(25,120,212)')
+    this.colorArray.push('rgb(0,127,170)')
+    this.colorArray.push('rgb(42,122,176)')
+    this.colorArray.push('rgb(0,128,128)')
+    this.colorArray.push('rgb(211,211,211)')
   }
 
   async createRegistersChart() {
