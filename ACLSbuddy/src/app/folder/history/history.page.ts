@@ -30,11 +30,12 @@ export class HistoryPage implements OnInit {
     this.valuesArray = []
   }
 
-  ionViewWillEnter(){
+  async ionViewWillEnter(){
     this.valuesArray = []
-    this.eventregister.storage.forEach((value) =>{
+    await this.eventregister.storage.forEach((value) =>{
       this.valuesArray.unshift(value);
     })
+    this.valuesArray.sort((a, b) => Date.parse(b.start) - Date.parse(a.start))
   }
 
 

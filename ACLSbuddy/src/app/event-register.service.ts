@@ -55,7 +55,7 @@ export class EventRegisterService {
     }
   }
   removeWholeEvent(event){
-    this.storage.remove(event.start.toString())
+    this.storage.remove(event.key)
   }
   async returnStorgeEntry(){
     return this.storage.get(this.eventNameStr)
