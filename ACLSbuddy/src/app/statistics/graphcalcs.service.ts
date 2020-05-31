@@ -6,17 +6,11 @@ import { Storage } from '@ionic/storage';
 })
 export class GraphcalcsService {
 
+  public survivalRate:number;
+
   constructor(
     public storage: Storage,
   ) { }
-
-  getSurvivalRate(){
-    let survivals = this.getRoscFrecuency()[0]
-    let deaths = this.getRoscFrecuency()[1]
-    let rate = (survivals*100)/(survivals+deaths)
-    let truncated = rate.toFixed(2)
-    return truncated
-  }
 
   getRegistersValues(){
     let complete = 30
@@ -26,52 +20,59 @@ export class GraphcalcsService {
   }
 
   async getAgesFrecuency(){
-    let yearsarray = [[],[],[],[],[],[],[],[],[],[]]
-    let yearsNotSpecified = []
+    let to20 = 0
+    let to30 = 0
+    let to40 = 0
+    let to50 = 0
+    let to60 = 0
+    let to70 = 0
+    let to80 = 0
+    let to90 = 0
+    let morethan90 =0
+    let yearsNotSpecified = 0
     let getvalues = []
     await this.storage.forEach((value) => {
       getvalues.push(value.age)
       if (value.age === '' || value.age === null){
-        yearsNotSpecified.push('')
+        yearsNotSpecified += 1
       }
       else{
         let decValue = Math.trunc(parseInt(value.age)/10)
         switch(decValue){
           case 0:
-            yearsarray[0].push(decValue);
+            to20 +=1
+            break;
           case 1:
-            yearsarray[0].push(decValue);
+            to20 +=1
+            break;
           case 2:
-            yearsarray[1].push(decValue);
+            to30 +=1
+            break;
           case 3:
-            yearsarray[2].push(decValue);
+            to40 +=1
+            break;
           case 4:
-            yearsarray[3].push(decValue);
+            to50 +=1
+            break;
           case 5:
-            yearsarray[4].push(decValue);
+            to60 +=1
+            break;
           case 6:
-            yearsarray[5].push(decValue);
+            to70 +=1
+            break;
           case 7:
-            yearsarray[6].push(decValue);
+            to80 +=1
+            break;
           case 8:
-            yearsarray[7].push(decValue);
+            to90 +=1
+            break;
           default:
-            yearsarray[8].push(decValue); 
+            morethan90 +=1
+            break;
         }
       }
     })
-    let valuetoreturn = []
-    valuetoreturn.push(yearsarray[0].length)
-    valuetoreturn.push(yearsarray[1].length)
-    valuetoreturn.push(yearsarray[2].length)
-    valuetoreturn.push(yearsarray[3].length)
-    valuetoreturn.push(yearsarray[4].length)
-    valuetoreturn.push(yearsarray[5].length)
-    valuetoreturn.push(yearsarray[6].length)
-    valuetoreturn.push(yearsarray[7].length)
-    valuetoreturn.push(yearsarray[8].length)
-    valuetoreturn.push(yearsNotSpecified.length)
-    return valuetoreturn
+    return [to20, to30, to40, to50, to60, to70, to80, to90, morethan90, yearsNotSpecified]
   }
 
   async getGenderFrecuency(){
@@ -113,16 +114,26 @@ export class GraphcalcsService {
     return Object.values(count)
   }
   async getRoscFrecuency(){
-    const count = {
-      'roscyes':0,
-      'roscno':0,
-      '':0
-    }
-    await this.storage.forEach( value => {
-      count[value.rhythm] += 1
+    let survival = 0
+    let deaths = 0
+    let undetermined = 0
+    await this.storage.forEach((value) => {
+      switch(value.rosc){
+        case "roscyes":
+          survival += 1;
+          break;
+        case "roscno":
+          deaths += 1;
+          break;
+        default:
+          undetermined += 1;
+          break;
+      }
     })
-    return Object.values(count)
+    let rate = (survival*100)/(survival+deaths)
+    this.survivalRate = parseInt(rate.toFixed(2))
+    return [survival, deaths, undetermined]
   }
-
 }
+
 

@@ -138,7 +138,7 @@ export class FolderPage implements OnInit {
     } 
 
     restartValues(){
-      this.timerservice.time = "00:00.000";
+      this.timerservice.reset();
       this.aclsService.step=0;
       this.aclsService.antiArrDose=0;
       this.aclsService.doseLido = '1 - 1.5 mg/kg';

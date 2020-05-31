@@ -126,7 +126,7 @@ export class StatisticsPage{
     let race = new Chart(await this.raceChart.nativeElement, {
       type: 'pie',
       data: {
-        labels: ['Caucasian', 'Native American', 'African American', 'Asian', 'Pacific Islander', 'unespecified'],
+        labels: ['Caucasian', 'Native American', 'African American', 'Asian', 'Pacific Islander', 'Not specified'],
         datasets: [{
           data: await this.graphcalc.getRaceFrecuency(),
           backgroundColor: this.colorArray, 
@@ -139,7 +139,7 @@ export class StatisticsPage{
     let rhythm = new Chart(await this.rhythmChart.nativeElement, {
       type: 'pie',
       data: {
-        labels: ['VF', 'pVT', 'Asystole', 'PEA'],
+        labels: ['VF', 'pVT', 'Asystole', 'PEA', 'Not specified'],
         datasets: [{
           data: await this.graphcalc.getRhythmFrecuency(),
           backgroundColor: this.colorArray, 
@@ -152,7 +152,7 @@ export class StatisticsPage{
     let rosc = new Chart(await this.roscChart.nativeElement, {
       type: 'pie',
       data: {
-        labels: ['Yes', 'No'],
+        labels: ['Yes', 'No', 'Not specified'],
         datasets: [{
           data: await this.graphcalc.getRoscFrecuency(),
           backgroundColor: this.colorArray, 
