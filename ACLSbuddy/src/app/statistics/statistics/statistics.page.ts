@@ -45,18 +45,16 @@ export class StatisticsPage{
   }
 
   generateColorArray() {
-    this.colorArray.push('rgb(0,139,139)')
-    this.colorArray.push('rgb(40,162,40)')
-    this.colorArray.push('rgb(36,161,89)')
-    this.colorArray.push('rgb(1,152,117)')
-    this.colorArray.push('rgb(109,136,145)')
-    this.colorArray.push('rgb(75,119,190)')
-    this.colorArray.push('rgb(25,120,212)')
-    this.colorArray.push('rgb(0,127,170)')
-    this.colorArray.push('rgb(42,122,176)')
-    this.colorArray.push('rgb(52,56,94)')
-    this.colorArray.push('rgb(0,128,128)')
-    this.colorArray.push('rgb(211,211,211)')
+    this.colorArray.push('#22577A')
+    this.colorArray.push('#38A3A5')
+    this.colorArray.push('#57CC99')
+    this.colorArray.push('#80ED99')
+    this.colorArray.push('#C7F9CC')
+    this.colorArray.push('#95B2B0')//
+    this.colorArray.push('#647AA3')
+    this.colorArray.push('#334195')
+    this.colorArray.push('#020887')
+    this.colorArray.push('#000000')
   }
 
   async createRegistersChart() {
