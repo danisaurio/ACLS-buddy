@@ -65,7 +65,7 @@ export class StatisticsPage{
       data: {
         labels: ['Complete', 'Partially/Non complete'],
         datasets: [{
-          data: this.graphcalc.getRegistersValues(),
+          data: await this.graphcalc.getRegistersValues(),
           backgroundColor: this.colorArray, 
           borderColor: 'rgb(38, 194, 129)',
           borderWidth: 1

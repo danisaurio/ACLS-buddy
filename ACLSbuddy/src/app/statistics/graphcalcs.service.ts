@@ -12,12 +12,29 @@ export class GraphcalcsService {
     public storage: Storage,
   ) { }
 
-  getRegistersValues(){
-    let complete = 30
-    let incomplete = 50
-    let returnarray = [complete,incomplete]
-    return returnarray
+  async getRegistersValues(){
+    let complete = 0
+    let incomplete = 0
+    let insideEmpty = 0
+    await this.storage.forEach( value => {
+      Object.values(value).forEach( innerValue =>{
+        if(innerValue === ''){
+          insideEmpty +=1
+        }
+      })
+      if(insideEmpty > 0){
+        incomplete += 1
+      }
+      else{
+        complete += 1
+      }
+      insideEmpty = 0
+    })
+    return [complete, incomplete]
   }
+
+
+
 
   async getAgesFrecuency(){
     let to20 = 0
