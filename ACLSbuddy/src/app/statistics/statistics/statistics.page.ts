@@ -18,8 +18,7 @@ export class StatisticsPage{
   @ViewChild('nationalChart') nationalChart;
 
   
-  public info: boolean = false;
-  public personal: boolean = true;
+  public personal: boolean = false;
   public statistics: boolean = true;
   public national: boolean = true;
   public colorArray: any = [];
@@ -36,12 +35,10 @@ export class StatisticsPage{
 
   selectChart(selectedChart: string){
     if (selectedChart === 'personal'){
-      this.info = true;
       this.personal = false;
       this.national = true;
     }
     if (selectedChart === 'national'){
-      this.info = true;
       this.personal = true;
       this.national = false;   
     }

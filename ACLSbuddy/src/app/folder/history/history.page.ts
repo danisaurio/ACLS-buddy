@@ -17,6 +17,7 @@ export class HistoryPage implements OnInit {
   public valuesArray: Array<{[key: string]: any}> = [];
   public eventtoedit: any;
   public entrycontrol = 0;
+  public iconColor
 
   constructor(
     public eventregister: EventRegisterService,
@@ -84,5 +85,45 @@ export class HistoryPage implements OnInit {
     
   } 
 
+  showInfoDecision(cpr): string {
+    let strToReturn =''
+    let name = cpr.initials
+    let age = cpr.age
+    if (name !== '' && age !== ''){
+      strToReturn = name+', '+age+' yo'
+    }
+    else if (name !== ''){
+      strToReturn = name
+    }
+    else if (age !== ''){
+      strToReturn = age+' yo'
+    }
+    return strToReturn
+  }
+
+  selectIcon(cpr): string {
+    let complete = "checkmark-done-circle"
+    let partial = "checkmark-circle"
+    let empty = "close-circle"
+    let emptyCount = 0
+    Object.values(cpr).forEach(value => {
+      if(value === ''){
+        emptyCount +=1
+      }
+    })
+    if (emptyCount >= 6){
+      this.iconColor = 'danger'
+      return empty
+    }
+    else if (emptyCount >=1){
+      this.iconColor = 'warning'
+      return partial
+    }
+    else {
+      this.iconColor = 'success'
+      return complete
+    }
+  }
 }
+
 

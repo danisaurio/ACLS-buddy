@@ -14,24 +14,26 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
   <ion-list>
-    <ion-item-sliding>
-      <ion-item>
-        <ion-label *ngIf = "valuesArray.length !== 0"><b>Click to edit</b></ion-label>
-        <ion-label *ngIf = "valuesArray.length === 0"><b>You have no CPR history available</b></ion-label>
-      </ion-item>
-    </ion-item-sliding>
-
+    <ion-label *ngIf = "valuesArray.length === 0"><b>You have no CPR history available</b></ion-label>
     <ion-item-sliding *ngFor="let p of valuesArray; let i = index">
-      <ion-item side='start'>
-        <ion-label (click) = "opendetails(p)" class = 'keys'>{{valuesArray[i].start.toString() |  date:'MMM/dd/yyyy, hh:mm:ss aaa'}}</ion-label>
+      <ion-item side='start' detail = 'true'>
+        <ion-avatar slot="start">
+          <ion-icon name={{selectIcon(p)}} color={{iconColor}} size='large' ></ion-icon>
+        </ion-avatar>
+        <ion-label (click) = "opendetails(p)" class = 'keys'>
+          {{valuesArray[i].start.toString() |  date:'MMM/dd/yyyy, hh:mm:ss aaa'}}<br>
+          <ion-note id='lightcolor'>{{showInfoDecision(p)}}</ion-note>
+        </ion-label>
       </ion-item>
       <ion-item-options side="end">
         <ion-item-option (click) = "deleteRegister(p)" color="danger">Delete</ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
-
 </ion-content>
+
+<ion-footer>
+  <ion-note>Icon color indicates if the patient's information is complete</ion-note>
+</ion-footer>
 
