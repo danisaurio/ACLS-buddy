@@ -28,9 +28,9 @@ export class FolderPage implements OnInit {
       this.aclsService.askRhythm.subscribe(() => {
           this.askRhythm();
       });
-      // this.aclsService.step12input.subscribe(() => {
-      //     this.rosc();
-      // });
+      this.aclsService.step12input.subscribe(() => {
+          this.rosc();
+      });
     }
     start() {
       this.timerservice.start();

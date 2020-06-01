@@ -25,7 +25,7 @@ describe('FolderPage', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('should listen', () => {
+  describe('should listen', () => { 
     beforeEach(async() => {
       component.ngOnInit();
       await fixture.whenStable();
