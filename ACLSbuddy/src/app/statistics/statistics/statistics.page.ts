@@ -22,6 +22,13 @@ export class StatisticsPage{
   public statistics: boolean = true;
   public national: boolean = true;
   public colorArray: any = [];
+  public registers: Chart;
+  public age: Chart;
+  public race: Chart;
+  public gender: Chart;
+  public rhythm: Chart;
+  public rosc: Chart;
+
 
   constructor(
     public graphcalc:GraphcalcsService,
@@ -50,7 +57,7 @@ export class StatisticsPage{
     this.colorArray.push('#57CC99')
     this.colorArray.push('#80ED99')
     this.colorArray.push('#C7F9CC')
-    this.colorArray.push('#95B2B0')//
+    this.colorArray.push('#95B2B0')
     this.colorArray.push('#647AA3')
     this.colorArray.push('#334195')
     this.colorArray.push('#020887')
@@ -58,7 +65,7 @@ export class StatisticsPage{
   }
 
   async createRegistersChart() {
-    let registers = new Chart(await this.registerChart.nativeElement, {
+    this.registers = new Chart(await this.registerChart.nativeElement, {
       type: 'pie',
       data: {
         labels: ['Complete', 'Partially/Non complete'],
@@ -74,7 +81,7 @@ export class StatisticsPage{
   }
 
   async createPersonalChart(){
-    let age = new Chart(await this.ageChart.nativeElement, {
+    this.age = new Chart(await this.ageChart.nativeElement, {
       type: 'bar',
       data: {
         labels: ['20 or less yo', 
@@ -105,7 +112,7 @@ export class StatisticsPage{
       }
       }
     });
-    let gender = new Chart(await this.genderChart.nativeElement, {
+    this.gender = new Chart(await this.genderChart.nativeElement, {
       type: 'pie',
       data: {
         labels: ['Femenine', 'Masculine', 'Unespecified'],
@@ -118,7 +125,7 @@ export class StatisticsPage{
       },
       options: {}
     });
-    let race = new Chart(await this.raceChart.nativeElement, {
+    this.race = new Chart(await this.raceChart.nativeElement, {
       type: 'pie',
       data: {
         labels: ['Caucasian', 'Native American', 'African American', 'Asian', 'Pacific Islander', 'Not specified'],
@@ -131,7 +138,7 @@ export class StatisticsPage{
       },
       options: {}
     });
-    let rhythm = new Chart(await this.rhythmChart.nativeElement, {
+    this.rhythm = new Chart(await this.rhythmChart.nativeElement, {
       type: 'pie',
       data: {
         labels: ['VF', 'pVT', 'Asystole', 'PEA', 'Not specified'],
@@ -144,7 +151,7 @@ export class StatisticsPage{
       },
       options: {}
     });
-    let rosc = new Chart(await this.roscChart.nativeElement, {
+    this.rosc = new Chart(await this.roscChart.nativeElement, {
       type: 'pie',
       data: {
         labels: ['Yes', 'No', 'Not specified'],

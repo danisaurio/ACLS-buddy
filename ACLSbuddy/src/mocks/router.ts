@@ -14,17 +14,26 @@ export class MockRouter {
                         ['epi']: [this.date1, this.date1],
                         ['antiarr']: [this.date1, this.date1],
                         ['selecteddrug']: 'Amiodarone',
-                        ['initials']:'',
-                        ['age']:'',
-                        ['gender']:'',
-                        ['race']:'',
-                        ['rhythm']:'',
-                        ['rosc']:'',
+                        ['initials']:'A',
+                        ['age']:'1',
+                        ['gender']:'male',
+                        ['race']:'native',
+                        ['rhythm']:'asystole',
+                        ['rosc']:'roscyes',
                         ['key']:this.date1.toString(),
                     }
                 }
             },
         }
     }
+    
+    createUrlTree(){
+
+    }
+
+    serializeUrl(){
+        
+    }
+
 
 }

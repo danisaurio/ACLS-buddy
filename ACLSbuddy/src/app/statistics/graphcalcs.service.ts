@@ -33,9 +33,6 @@ export class GraphcalcsService {
     return [complete, incomplete]
   }
 
-
-
-
   async getAgesFrecuency(){
     let to20 = 0
     let to30 = 0

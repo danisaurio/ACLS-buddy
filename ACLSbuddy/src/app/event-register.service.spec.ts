@@ -25,7 +25,7 @@ describe('EventRegisterService', () => {
       service.rcpEventStart(date);
       expect(Object.keys(service.partialDict).length).toEqual(0);
     })
-    it('should end with 6 elements', ()=>{
+    it('should end with 13 elements', ()=>{
       let date = new Date
       service.rcpEventStart(date);
       service.rcpEventEnds(date)

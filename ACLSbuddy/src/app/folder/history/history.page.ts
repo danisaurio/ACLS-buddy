@@ -3,7 +3,7 @@ import { EventRegisterService } from 'src/app/event-register.service';
 import { AclsService } from 'src/app/acls.service';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
-import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 
 
@@ -75,16 +75,7 @@ export class HistoryPage implements OnInit {
     }
 
   }
-  async opendetails(p: {[key: string]: any}){
-    let navigationExtras: NavigationExtras = {
-      state: {
-        user: p
-      }
-    };
-    await this.router.navigate(['edit-event'], navigationExtras)
-    
-  } 
-
+  
   showInfoDecision(cpr): string {
     let strToReturn =''
     let name = cpr.initials
@@ -124,6 +115,15 @@ export class HistoryPage implements OnInit {
       return complete
     }
   }
+  async opendetails(p: {[key: string]: any}){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        user: p
+      }
+    };
+    await this.router.navigate(['edit-event'], navigationExtras)
+    
+  } 
 }
 
 

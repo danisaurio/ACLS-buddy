@@ -111,6 +111,7 @@ export class FolderPage implements OnInit {
         ]
       });
       await alert.present();
+      await alert.onDidDismiss()
     }
 
     async gatherPatientData(){
