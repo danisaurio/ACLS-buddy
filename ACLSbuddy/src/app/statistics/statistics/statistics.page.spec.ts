@@ -5,12 +5,9 @@ import { StatisticsPage } from './statistics.page';
 import { Storage } from '@ionic/storage';
 import { MockStorage } from 'src/mocks/storage';
 import { MockNavController } from 'src/mocks/navcontroller';
-import { ChildrenOutletContexts, Router, ActivatedRoute, RouterOutlet } from '@angular/router';
-import { MockChildrenOutletContexts } from 'src/mocks/childrenoutletcontexts';
+import { ChildrenOutletContexts, Router, ActivatedRoute } from '@angular/router';
 import { MockActivatedRoute } from 'src/mocks/activatedroute';
-import { RouterTestingModule } from '@angular/router/testing'; 
 import { MockRouter } from 'src/mocks/router';
-
 
 
 describe('StatisticsPage', () => {
@@ -20,11 +17,11 @@ describe('StatisticsPage', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ StatisticsPage ],
-      imports: [IonicModule.forRoot(), RouterTestingModule],
+      imports: [IonicModule.forRoot()],
       providers: [
         { provide: Storage, useClass: MockStorage },
         { provide: NavController, useClass: MockNavController },
-        { provide: ChildrenOutletContexts, useClass: MockChildrenOutletContexts },
+        { provide: ChildrenOutletContexts },
         { provide: ActivatedRoute, useClass: MockActivatedRoute },
         { provide: Router, useClass: MockRouter },
       ]
