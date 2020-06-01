@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { AclsService } from '../acls.service';
 import { TimerService } from '../timer.service';
-import { AlertController } from '@ionic/angular';
 import { EventRegisterService } from '../event-register.service';
+import { AlertService } from '../alert.service';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class FolderPage implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute, 
-    public alertController: AlertController,
+    public alertService: AlertService,
     public aclsService: AclsService, 
     public timerservice:TimerService,
     public eventregister: EventRegisterService,
@@ -28,9 +28,9 @@ export class FolderPage implements OnInit {
       this.aclsService.askRhythm.subscribe(() => {
           this.askRhythm();
       });
-      this.aclsService.step12input.subscribe(() => {
-          this.rosc();
-      });
+      // this.aclsService.step12input.subscribe(() => {
+      //     this.rosc();
+      // });
     }
     start() {
       this.timerservice.start();
@@ -39,13 +39,10 @@ export class FolderPage implements OnInit {
       const startTime = new Date;
       this.eventregister.rcpEventStart(startTime);
     }
-    async askRhythm() {
-      const alert = await this.alertController.create({
-        id: 'askRhythmAlert',
-        mode: "ios",
+    askRhythm() {
+      this.alertService.create({
         header: 'Is the rhythm shockeable?',
         message: '- Yes: VF or pVT<br>- No: Asystole or PEA',
-        backdropDismiss: false,
         buttons: [
           {
             text: 'YES',
@@ -61,12 +58,10 @@ export class FolderPage implements OnInit {
           }
         ]
       });
-      await alert.present();
+
     }
     async rosc() {
-      const alert = await this.alertController.create({
-        id: 'roscAlert',
-        mode: "ios",
+      this.alertService.create({
         header: 'Are there signs of return of spontaneous circulation?',
         backdropDismiss: false,
         buttons: [
@@ -85,13 +80,10 @@ export class FolderPage implements OnInit {
           }
         ]
       });
-      await alert.present();
     }
     async stopButtonPressed(){
       
-      const alert = await this.alertController.create({
-        id: 'stoplert',
-        mode: "ios",
+      this.alertService.create({
         header: 'Ending CPR, Are you sure?',
         backdropDismiss: false,
         buttons: [
@@ -99,6 +91,7 @@ export class FolderPage implements OnInit {
             text: 'YES',
             handler: async() => {
               this.timerservice.stopTwoMinNotification();
+              this.alertService.eliminateRemainingAlerts();
               this.timerservice.stop();
               const endTime = new Date();
               await this.eventregister.rcpEventEnds(endTime);
@@ -110,12 +103,11 @@ export class FolderPage implements OnInit {
           }
         ]
       });
-      await alert.present();
-      await alert.onDidDismiss()
+
     }
 
     async gatherPatientData(){
-      const alert = await this.alertController.create({
+      this.alertService.create({
         id: 'patientDataAlert',
         header: "Do you want to enter the patient's information now?",
         backdropDismiss: false,
@@ -135,7 +127,6 @@ export class FolderPage implements OnInit {
           ]
         
         })
-          await alert.present();
     } 
 
     restartValues(){

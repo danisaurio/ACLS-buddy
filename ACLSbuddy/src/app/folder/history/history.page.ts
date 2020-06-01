@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { EventRegisterService } from 'src/app/event-register.service';
 import { AclsService } from 'src/app/acls.service';
 import { Storage } from '@ionic/storage';
-import { AlertController } from '@ionic/angular';
 import { Router, NavigationExtras } from '@angular/router';
+import { AlertService } from 'src/app/alert.service';
 
 
 
@@ -23,7 +23,7 @@ export class HistoryPage implements OnInit {
     public eventregister: EventRegisterService,
     public acls: AclsService,
     public storage:Storage,
-    public alertController: AlertController,
+    public alertService: AlertService,
     public router:Router,
   ) {}
 
@@ -41,7 +41,7 @@ export class HistoryPage implements OnInit {
 
 
   async deleteRegister(p: {[key: string]: any}){
-    const alert = await this.alertController.create({
+    this.alertService.create({
       mode: "ios",
       header: 'Are you sure you want to delete this entry?',
       backdropDismiss: false,
@@ -50,7 +50,7 @@ export class HistoryPage implements OnInit {
           text: 'YES',
           handler: async() => {
             this.removeValue(p)
-            const alert = await this.alertController.create({
+            this.alertService.create({
               header: 'Confirmation',
               message: 'Register deleted',
               buttons: [{
@@ -58,7 +58,6 @@ export class HistoryPage implements OnInit {
                 handler: () => {this.ngOnInit();}
               }]
             });
-            await alert.present();
           }
         },
         {
@@ -66,7 +65,6 @@ export class HistoryPage implements OnInit {
         }
       ]
     });
-    await alert.present();
   } 
   removeValue(p: {[key: string]: any}){
     this.eventregister.removeWholeEvent(p)
@@ -122,7 +120,6 @@ export class HistoryPage implements OnInit {
       }
     };
     await this.router.navigate(['edit-event'], navigationExtras)
-    
   } 
 }
 

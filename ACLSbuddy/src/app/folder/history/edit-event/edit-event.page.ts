@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { EventRegisterService } from 'src/app/event-register.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AclsService } from 'src/app/acls.service';
-import { AlertController } from '@ionic/angular';
+import { AlertService } from 'src/app/alert.service';
 
 
 @Component({
@@ -25,7 +25,7 @@ export class EditEventPage implements OnInit {
     private route: ActivatedRoute, 
     private router: Router,
     public aclsService: AclsService,
-    public alertController: AlertController,
+    public alertService: AlertService,
     public htmlelement: ElementRef,
   ) { 
     this.route.queryParams.subscribe(params => {
@@ -46,7 +46,7 @@ export class EditEventPage implements OnInit {
   }
 
   async deleteButton(){
-    const alert = await this.alertController.create({
+    this.alertService.create({
       id: 'deletedataalert',
       header: "Do you want to delete this entry? This action can't be undone",
       backdropDismiss: false,
@@ -63,7 +63,6 @@ export class EditEventPage implements OnInit {
           }
         ]
       })
-      await alert.present();
       }; 
 
   async saveButton(){
