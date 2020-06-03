@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import  *  as  coefs  from  '../stats/national/logical-regression/coefs.json';
+import { ValueAccessor } from '@ionic/angular/directives/control-value-accessors/value-accessor';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +9,7 @@ import { Storage } from '@ionic/storage';
 export class GraphcalcsService {
 
   public survivalRate;
+  public regressionCoef;
 
   constructor(
     public storage: Storage,
@@ -145,12 +148,119 @@ export class GraphcalcsService {
       }
     })
     let rate = (survival*100)/(survival+deaths)
-    this.survivalRate = parseInt(rate.toFixed(2))+'%'
+    this.survivalRate = this.calcSurvivalRate(rate)
+    return [survival, deaths, undetermined]
+  }
+  calcSurvivalRate(rate){
+    this.survivalRate = parseInt(rate.toFixed(2))
     if (!parseInt(rate.toFixed(2))){
       this.survivalRate = 'No data entered'
     }
-    return [survival, deaths, undetermined]
+    return this.survivalRate
   }
+  getNationalRegCoef(){
+    this.regressionCoef = Object.values(coefs)[0]
+    return this.regressionCoef
+  }
+
+  async getValidEntries(){
+    let validentires =[]
+    await this.storage.forEach(value => {
+      if(value.age !== '' && value.gender !== '' &&
+      value.race !== '' && value.rhythm !== '' &&
+      value.rosc !== ''){
+        validentires.push(value)
+      }
+    })
+    return validentires
+  }
+
+  async getProjectedRate(){
+    let probabilityArray =[]
+    let regressionCoef = this.getNationalRegCoef()
+    let entries = await this.getValidEntries()
+
+    entries.forEach((value) =>{
+      let sumCoef = 0
+      sumCoef += value.age * regressionCoef.age
+      if(value.gender == 'female'){
+        sumCoef += regressionCoef.sex_female
+      }
+      else if(value.gender == 'male'){
+        sumCoef += regressionCoef.sex_male
+      }
+      if(value.rhythm == 'asystole'){
+        sumCoef += regressionCoef.rhythm_asystole
+      }
+      else if(value.rhythm == 'pea'){
+        sumCoef += regressionCoef.rhythm_pea
+      }
+      else if(value.rhythm == 'pvt'){
+        sumCoef += regressionCoef.rhythm_pvt
+      }
+      else if(value.rhythm == 'vf'){
+        sumCoef +=  regressionCoef.rhythm_vf
+      }
+      if(value.race === 'african'){
+        sumCoef += regressionCoef.race_african
+      }
+      else if(value.race === 'asian'){
+        sumCoef += regressionCoef.race_asian
+      }
+      else if(value.race === 'caucasian'){
+        sumCoef += regressionCoef.race_caucasian
+      }
+      else if(value.race === 'islander'){
+        sumCoef += regressionCoef.race_islander
+      }
+      else if(value.race === 'native'){
+        sumCoef += regressionCoef.race_native
+      }
+      let basicPoint = 1/(1+(Math.E ** sumCoef))
+      probabilityArray.push(basicPoint)
+    })
+    let sumofBasicPoints = 0
+    probabilityArray.forEach(basicPoint =>{
+      sumofBasicPoints += basicPoint
+    })
+    let average = (sumofBasicPoints/probabilityArray.length)*100
+    return average
+  }
+
+  async getNetRate(){
+    let entires = await this.getValidEntries()
+    let survival = 0
+    let deaths = 0
+    let undetermined = 0
+    entires.forEach(value => {
+      switch(value.rosc){
+        case "roscyes":
+          survival += 1;
+          break;
+        case "roscno":
+          deaths += 1;
+          break;
+        default:
+          undetermined += 1;
+          break;
+      }
+    })
+    let rate = (survival*100)/(survival+deaths)
+    let survRateofValidEntries = this.calcSurvivalRate(rate)
+    return survRateofValidEntries
+  }
+
+  async returnRatesGraph(){
+    await this.getRoscFrecuency()
+    let surv = await this.getNetRate()
+    let proj = await this.getProjectedRate()
+    let colsValues = [surv, proj.toFixed(2)]
+    return colsValues 
+  }
+
 }
+
+
+
 
 

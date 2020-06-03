@@ -211,11 +211,14 @@ plt.show()
 
 # In[18]:
 
-
+import json
 finalcoefs = result.params.values #coef to be used by the statistics file
-print(finalcoefs)
-print(cols) 
-np.savetxt('regression_coef.txt', finalcoefs, fmt='%f')
-np.savetxt('regression_cols.txt', cols, fmt='%s', delimiter=' ', newline='\n', header='', footer='', comments='# ', encoding=None)
-
+coeflist = finalcoefs.tolist()
+finaldict = {}
+for i in range(len(coeflist)):
+    finaldict.update({cols[i]:coeflist[i]})
+print(finaldict)
+json_dict = json.dumps(finaldict) 
+with open('coefs.json', 'w') as json_file:
+    json_file.write(json_dict) 
 

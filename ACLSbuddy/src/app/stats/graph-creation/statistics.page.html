@@ -18,7 +18,7 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <div [hidden] = "personal">
+        <div [hidden] = "patient">
           <ion-card>
             <ion-card-header>
               <ion-card-title>Available registers</ion-card-title>
@@ -33,8 +33,7 @@
           <ion-card>
             <ion-card-header>
               <ion-card-title>Personal Statistics</ion-card-title>
-              <ion-card-subtitle>These statistics are based on the information of every record</ion-card-subtitle>
-              <ion-text>Each consider patients distribution</ion-text>
+              <ion-card-subtitle>These statistics are based on the records' information</ion-card-subtitle>
             </ion-card-header>
           </ion-card>
           <ion-card>
@@ -66,18 +65,38 @@
               <ion-card-title>ROSC</ion-card-title>
               <ion-card-subtitle>Return of spontaneous circulation</ion-card-subtitle>
               <canvas #roscChart width="1000" height="1000"></canvas>
-              <ion-text><br>Survival Rate: {{graphcalc.survivalRate}}</ion-text>
+              <ion-text><br>Survival Rate: {{graphcalc.survivalRate}}
+                <span *ngIf = "graphcalc.survivalRate !== 'No data entered'">%</span>
+              </ion-text>
             </ion-card-content>
           </ion-card>
         </div>
-        <ion-card [hidden] = "national">
+        <ion-card [hidden] = "personal">
           <ion-card-header>
-            <ion-card-title>National Statistics</ion-card-title>
-            <ion-card-subtitle>Comparative charts of your personal statistics vs national rates</ion-card-subtitle>
+            <ion-card-title>Personal Rates</ion-card-title>
+            <ion-card-subtitle>Personal statistics* according to national tendencies</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
             <canvas #nationalChart width="1000" height="1000"></canvas>
           </ion-card-content>
+          <ion-note>*Considers entries with complete information</ion-note><br>
+          <ion-note>**Expected survival probability based on patient's factors</ion-note>
+        </ion-card>
+        <ion-card>
+          <div [hidden] = "better">
+            <ion-card-header color = 'success'>Congratulations!</ion-card-header>
+            <ion-card-content>
+              According to this information, the survival rate you've achieved is greater than the 
+              expected for these patient's
+            </ion-card-content>
+          </div>
+          <div [hidden] = "!better">
+            <ion-card-header color = 'dark'>Results:</ion-card-header>
+            <ion-card-content>
+              According to this information, the survival rate you've achieved is smaller than the 
+              expected for these patient's
+            </ion-card-content>
+          </div>
         </ion-card>
       </ion-col>
     </ion-row>
@@ -89,13 +108,13 @@
 <ion-toolbar>
   <ion-tabs id='tabs'>
     <ion-tab-bar slot="bottom">
-      <ion-tab-button (click)= "selectChart('personal')">
+      <ion-tab-button (click)= "selectChart('patient')">
         <ion-icon name="person"></ion-icon>
-        <ion-label>Personal statistics</ion-label>
+        <ion-label>Patients statistics</ion-label>
       </ion-tab-button>
       <ion-tab-button>
-        <ion-icon name="globe" (click)= "selectChart('national')"></ion-icon>
-        <ion-label>National rates</ion-label>
+        <ion-icon name="globe" (click)= "selectChart('personal')"></ion-icon>
+        <ion-label>Personal rates</ion-label>
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>

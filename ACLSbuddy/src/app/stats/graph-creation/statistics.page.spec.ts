@@ -38,13 +38,13 @@ describe('StatisticsPage', () => {
 describe('should show just 1 set of statistics',() => {
   it('show personal and no national', () => {
     component.selectChart('personal')
-    expect(component.national).toEqual(true)
-    expect(component.personal).toEqual(false)
+    expect(component.personal).toEqual(true)
+    expect(component.patient).toEqual(false)
   })
   it('show national and no personal', () => {
     component.selectChart('national')
-    expect(component.personal).toEqual(true)
-    expect(component.national).toEqual(false)
+    expect(component.patient).toEqual(true)
+    expect(component.personal).toEqual(false)
   })
 })
 describe('should create graphs', () =>{

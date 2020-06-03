@@ -18,9 +18,9 @@ export class StatisticsPage{
   @ViewChild('nationalChart') nationalChart;
 
   
-  public personal: boolean = false;
-  public statistics: boolean = true;
-  public national: boolean = true;
+  public patient: boolean = false;
+  public personal: boolean = true;
+  public better: boolean = true;
   public colorArray: any = [];
   public registers: Chart;
   public age: Chart;
@@ -39,17 +39,28 @@ export class StatisticsPage{
     this.generateColorArray();
     this.createRegistersChart();
     this.createPersonalChart();
-    this.createNationalChart();    
+    this.createNationalChart();  
+    this.graphcalc.getNationalRegCoef();  
+    this.nationalInformationCard()
   }
 
   selectChart(selectedChart: string){
-    if (selectedChart === 'personal'){
-      this.personal = false;
-      this.national = true;
-    }
-    if (selectedChart === 'national'){
+    if (selectedChart === 'patient'){
+      this.patient = false;
       this.personal = true;
-      this.national = false;   
+    }
+    if (selectedChart === 'personal'){
+      this.patient = true;
+      this.personal = false;   
+    }
+  }
+
+  nationalInformationCard(){
+    if(this.graphcalc.returnRatesGraph[0]>this.graphcalc.returnRatesGraph[1]){
+      this.better = true;
+    }
+    else{
+      this.better = false;
     }
   }
 
@@ -170,17 +181,27 @@ export class StatisticsPage{
 
   async createNationalChart(){
     this.nat = new Chart(await this.nationalChart.nativeElement, {
-      type: 'pie',
+      type: 'bar',
       data: {
-        labels: ['Yes', 'No', 'Not specified'],
+        labels: ['Net', 'Projected**'],
         datasets: [{
-          data: await this.graphcalc.getRoscFrecuency(),
+          label:'Percentage',
+          data: await this.graphcalc.returnRatesGraph(),
           backgroundColor: this.colorArray, 
           borderColor: 'rgb(38, 194, 129)',
           borderWidth: 1
         }]
       },
-      options: {}
+      options: {
+        scales: {
+          yAxes: [{
+              ticks: {
+                  suggestedMin: 0,
+                  suggestedMax: 100
+              }
+          }]
+      }
+      }
     });
   }
 }
