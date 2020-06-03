@@ -19,7 +19,7 @@ sns.set(style="whitegrid", color_codes=True)
 # In[2]:
 
 
-data = pd.read_csv('../DataDaniela.csv', header=0)
+data = pd.read_csv('./DataDaniela.csv', header=0)
 data = data.dropna()
 print(data.shape)
 print(list(data.columns))
