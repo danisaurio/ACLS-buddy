@@ -6,7 +6,7 @@ import { Storage } from '@ionic/storage';
 })
 export class GraphcalcsService {
 
-  public survivalRate:number;
+  public survivalRate;
 
   constructor(
     public storage: Storage,
@@ -145,7 +145,10 @@ export class GraphcalcsService {
       }
     })
     let rate = (survival*100)/(survival+deaths)
-    this.survivalRate = parseInt(rate.toFixed(2))
+    this.survivalRate = parseInt(rate.toFixed(2))+'%'
+    if (!parseInt(rate.toFixed(2))){
+      this.survivalRate = 'No data entered'
+    }
     return [survival, deaths, undetermined]
   }
 }
