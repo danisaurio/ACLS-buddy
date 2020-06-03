@@ -10,19 +10,19 @@ const routes: Routes = [
   },
   {
     path: 'folder/history',
-    loadChildren: () => import('./folder/history/history.module').then( m => m.HistoryPageModule)
+    loadChildren: () => import('./history/history.module').then( m => m.HistoryPageModule)
   },
   {
     path: 'folder/statistics',
-    loadChildren: () => import('./statistics/statistics/statistics.module').then( m => m.StatisticsPageModule)
+    loadChildren: () => import('./stats/personal/statistics.module').then( m => m.StatisticsPageModule)
   },
   {
     path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    loadChildren: () => import('./start-cpr/folder.module').then( m => m.FolderPageModule)
   },
   {
     path: 'edit-event',
-    loadChildren: () => import('./folder/history/edit-event/edit-event.module').then( m => m.EditEventPageModule)
+    loadChildren: () => import('./history/edit-event/edit-event.module').then( m => m.EditEventPageModule)
   },
 
 ];
