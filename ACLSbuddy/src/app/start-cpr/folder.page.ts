@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { AclsService } from '../acls.service';
-import { TimerService } from '../timer.service';
-import { EventRegisterService } from '../event-register.service';
-import { AlertService } from '../alert.service';
+import { AclsService } from '../services/acls.service';
+import { TimerService } from '../services/timer.service';
+import { EventRegisterService } from '../services/event-register.service';
+import { AlertService } from '../services/alert.service';
 
 
 @Component({

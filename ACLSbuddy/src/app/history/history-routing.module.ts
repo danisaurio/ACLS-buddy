@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { FolderPage } from './folder.page';
+import { HistoryPage } from './history.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: FolderPage
+    component: HistoryPage
   },
   {
-    path: 'history',
-    loadChildren: () => import('./history/history.module').then( m => m.HistoryPageModule)
+    path: 'edit-event',
+    loadChildren: () => import('./edit-event/edit-event.module').then( m => m.EditEventPageModule)
   }
-
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class FolderPageRoutingModule {}
+export class HistoryPageRoutingModule {}

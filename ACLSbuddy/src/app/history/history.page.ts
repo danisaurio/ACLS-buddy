@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { EventRegisterService } from 'src/app/event-register.service';
-import { AclsService } from 'src/app/acls.service';
+import { EventRegisterService } from 'src/app/services/event-register.service';
+import { AclsService } from 'src/app/services/acls.service';
 import { Storage } from '@ionic/storage';
 import { Router, NavigationExtras } from '@angular/router';
-import { AlertService } from 'src/app/alert.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 
 

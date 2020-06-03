@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
-import { GraphcalcsService } from '../graphcalcs.service';
+import { GraphcalcsService } from '../../services/graphcalcs.service';
 
 @Component({
   selector: 'app-statistics',
