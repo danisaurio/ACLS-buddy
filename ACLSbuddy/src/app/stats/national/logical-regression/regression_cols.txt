@@ -1,0 +1,12 @@
+age
+sex_female
+sex_male
+rhythm_asystole
+rhythm_pea
+rhythm_pvt
+rhythm_vf
+race_african
+race_asian
+race_caucasian
+race_islander
+race_native
