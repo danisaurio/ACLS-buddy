@@ -28,6 +28,7 @@ export class StatisticsPage{
   public gender: Chart;
   public rhythm: Chart;
   public rosc: Chart;
+  public nat: Chart;
 
 
   constructor(
@@ -35,9 +36,10 @@ export class StatisticsPage{
   ) {}
 
   ionViewDidEnter() {
+    this.generateColorArray();
     this.createRegistersChart();
     this.createPersonalChart();
-    this.generateColorArray()
+    this.createNationalChart();    
   }
 
   selectChart(selectedChart: string){
@@ -166,7 +168,19 @@ export class StatisticsPage{
     });
   }
 
-  createNationalChart(){
-
+  async createNationalChart(){
+    this.nat = new Chart(await this.nationalChart.nativeElement, {
+      type: 'pie',
+      data: {
+        labels: ['Yes', 'No', 'Not specified'],
+        datasets: [{
+          data: await this.graphcalc.getRoscFrecuency(),
+          backgroundColor: this.colorArray, 
+          borderColor: 'rgb(38, 194, 129)',
+          borderWidth: 1
+        }]
+      },
+      options: {}
+    });
   }
 }

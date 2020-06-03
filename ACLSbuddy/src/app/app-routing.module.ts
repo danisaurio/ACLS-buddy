@@ -14,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'folder/statistics',
-    loadChildren: () => import('./stats/personal/statistics.module').then( m => m.StatisticsPageModule)
+    loadChildren: () => import('./stats/graph-creation/statistics.module').then( m => m.StatisticsPageModule)
   },
   {
     path: 'folder/:id',
