@@ -13,10 +13,10 @@ export class AlertService {
     public alertController: AlertController
   ) { }
 
-  create(alertParams){
+  async create(alertParams){
     this.pendingAlerts.push(alertParams)
     if(this.pendingAlerts.length === 1){
-      this.showAlert()
+      await this.showAlert()
     } 
   }
   private async showAlert(){

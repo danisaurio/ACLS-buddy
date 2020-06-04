@@ -55,8 +55,8 @@ export class FolderPage implements OnInit {
       const startTime = new Date;
       this.eventregister.rcpEventStart(startTime);
     }
-    askRhythm() {
-      this.alertService.create({
+    async askRhythm() {
+      await this.alertService.create({
         header: 'Is the rhythm shockeable?',
         message: '- Yes: VF or pVT<br>- No: Asystole or PEA',
         buttons: [
@@ -77,7 +77,7 @@ export class FolderPage implements OnInit {
 
     }
     async rosc() {
-      this.alertService.create({
+      await this.alertService.create({
         header: 'Are there signs of return of spontaneous circulation?',
         backdropDismiss: false,
         buttons: [
