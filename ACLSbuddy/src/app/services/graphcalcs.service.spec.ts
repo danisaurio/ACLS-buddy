@@ -105,6 +105,29 @@ describe('GraphcalcsService', () => {
     })
 
   })
+  it('valid entries should return valid value', async() => {
+    let validentries = await service.getValidEntries()
+    expect(validentries.length).toEqual(3)
+  })
+  it('registers values shuld return valid value', async() => {
+    let regvaluescomplete = await service.getRegistersValues()
+    expect(regvaluescomplete[0]).toEqual(2)
+    expect(regvaluescomplete[1]).toEqual(1)
+  })
+  describe('get projected rate', () => {
+    it('should return a number between 0 and 100', async() => {
+      let result = await service.getProjectedRate()
+      expect(result).toBeGreaterThanOrEqual(0)
+      expect(result).toBeLessThanOrEqual(100)
+    })
+  })
+  describe('get net rate', () => {
+    it('should return a number between 0 and 100', async() => {
+      let result = await service.getProjectedRate()
+      expect(result).toBeGreaterThanOrEqual(0)
+      expect(result).toBeLessThanOrEqual(100)
+    })
+  })
 
 
 

@@ -64,8 +64,12 @@ describe('should create graphs', () =>{
   it('rhythm', ()=>{
     expect(component.rhythm).not.toBe(null)
   })
-  it('rosc', ()=>{
+  it
+  ('rosc', ()=>{
     expect(component.rosc).not.toBe(null)
+  })
+  it('national', ()=>{
+    expect(component.nationalChart).not.toBe(null)
   })
 })
 

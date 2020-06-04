@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { MockStorage } from 'src/mocks/storage';
@@ -51,6 +51,19 @@ describe('HistoryPage', () => {
     expect(component.opendetails).toHaveBeenCalledWith(component.valuesArray[0])
 
   }))
+  it ('should show info from the corresponding event', () => {
+    let key = new Date('Thu May 28 2020 15:21:16 GMT-0700 (Pacific Daylight Time)').toString()
+    let cpr = component.storage.get(key)
+    let result = component.showInfoDecision(cpr)
+    expect(result).toEqual('A, 1 yo')
+
+  })
+  it('should display correct icon', () => {
+    let key = new Date('Thu May 28 2020 15:21:16 GMT-0700 (Pacific Daylight Time)').toString()
+    let cpr = component.storage.get(key)
+    let result = component.selectIcon(cpr)
+    expect(result).toEqual("checkmark-done-circle")
+  })
 
 
 });
