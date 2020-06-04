@@ -82,18 +82,18 @@
           <ion-note>*Considers entries with complete information</ion-note><br>
           <ion-note>**Expected survival probability based on patient's factors</ion-note>
         </ion-card>
-        <ion-card>
-          <div [hidden] = "better">
+        <ion-card [hidden] = "personal">
+          <div [hidden] = "!congratulate">
             <ion-card-header color = 'success'>Congratulations!</ion-card-header>
             <ion-card-content>
               According to this information, the survival rate you've achieved is greater than the 
               expected for these patient's
             </ion-card-content>
           </div>
-          <div [hidden] = "!better">
-            <ion-card-header color = 'dark'>Results:</ion-card-header>
+          <div [hidden] = "congratulate">
+            <ion-card-header color = 'danger'>Results:</ion-card-header>
             <ion-card-content>
-              According to this information, the survival rate you've achieved is smaller than the 
+              According to this information, the survival rate you've achieved is worse than the 
               expected for these patient's
             </ion-card-content>
           </div>

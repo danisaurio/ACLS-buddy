@@ -147,13 +147,14 @@ export class GraphcalcsService {
           break;
       }
     })
-    let rate = (survival*100)/(survival+deaths)
-    this.survivalRate = this.calcSurvivalRate(rate)
+    this.survivalRate = this.calcSurvivalRate(survival, deaths)
     return [survival, deaths, undetermined]
   }
-  calcSurvivalRate(rate){
+  calcSurvivalRate(survival, deaths){
+    let total = survival+deaths
+    let rate = (survival*100)/total
     this.survivalRate = parseInt(rate.toFixed(2))
-    if (!parseInt(rate.toFixed(2))){
+    if (total === 0){
       this.survivalRate = 'No data entered'
     }
     return this.survivalRate
@@ -231,7 +232,6 @@ export class GraphcalcsService {
     let entires = await this.getValidEntries()
     let survival = 0
     let deaths = 0
-    let undetermined = 0
     entires.forEach(value => {
       switch(value.rosc){
         case "roscyes":
@@ -240,21 +240,16 @@ export class GraphcalcsService {
         case "roscno":
           deaths += 1;
           break;
-        default:
-          undetermined += 1;
-          break;
       }
     })
-    let rate = (survival*100)/(survival+deaths)
-    let survRateofValidEntries = this.calcSurvivalRate(rate)
+    let survRateofValidEntries = this.calcSurvivalRate(survival, deaths)
     return survRateofValidEntries
   }
 
   async returnRatesGraph(){
-    await this.getRoscFrecuency()
     let surv = await this.getNetRate()
     let proj = await this.getProjectedRate()
-    let colsValues = [surv, proj.toFixed(2)]
+    let colsValues = [surv, +proj.toFixed(2)]
     return colsValues 
   }
 

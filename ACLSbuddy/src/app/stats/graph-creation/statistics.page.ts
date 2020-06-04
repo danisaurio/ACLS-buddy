@@ -20,7 +20,7 @@ export class StatisticsPage{
   
   public patient: boolean = false;
   public personal: boolean = true;
-  public better: boolean = true;
+  public congratulate: boolean = true;
   public colorArray: any = [];
   public registers: Chart;
   public age: Chart;
@@ -55,12 +55,14 @@ export class StatisticsPage{
     }
   }
 
-  nationalInformationCard(){
-    if(this.graphcalc.returnRatesGraph[0]>this.graphcalc.returnRatesGraph[1]){
-      this.better = true;
+  async nationalInformationCard(){
+    let surv = await this.graphcalc.returnRatesGraph()
+    console.log(surv)
+    if(surv[0] > surv[1]){
+      this.congratulate = true;
     }
     else{
-      this.better = false;
+      this.congratulate = false;
     }
   }
 
