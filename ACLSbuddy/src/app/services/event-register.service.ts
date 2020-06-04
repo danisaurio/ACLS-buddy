@@ -13,6 +13,7 @@ export class EventRegisterService {
   public antiarrDict: Array<Date>;
   public starttime: Date;
   public antiarrselected: string = 'Antiarrhythmic';
+  public patientInitials: string = '';
 
   constructor(
     public storage: Storage,
@@ -34,7 +35,7 @@ export class EventRegisterService {
     this.partialDict['epi'] = this.epiDict;
     this.partialDict['antiarr'] = this.antiarrDict;
     this.partialDict['selecteddrug'] = this.antiarrselected;
-    this.partialDict['initials'] ='';
+    this.partialDict['initials'] =this.patientInitials;
     this.partialDict['age']='';
     this.partialDict['gender']='';
     this.partialDict['race']='';
@@ -59,6 +60,9 @@ export class EventRegisterService {
   }
   async returnStorgeEntry(){
     return this.storage.get(this.eventNameStr)
+  }
+  setPatientInitials(initials: string){
+    this.patientInitials = initials
   }
 
 }

@@ -13,6 +13,8 @@ import { AlertService } from '../services/alert.service';
 })
 export class FolderPage implements OnInit {
   public folder: string;
+  public bannercolor: string;
+  public bannermessage: string;
 
   constructor(
     private activatedRoute: ActivatedRoute, 
@@ -25,6 +27,20 @@ export class FolderPage implements OnInit {
 
     ngOnInit() {
       this.folder = this.activatedRoute.snapshot.paramMap.get('id');
+      if(this.folder === 'CPR'){
+        this.timerservice.timeoutTime = 120000
+        this.bannercolor = 'success'
+        this.bannermessage = 'CPR'
+        this.eventregister.setPatientInitials('')
+      }
+      else{
+        this.folder = this.folder+' mode'
+        this.timerservice.timeoutTime = 4000
+        this.bannercolor = "secondary"
+        this.bannermessage = 'demo'
+        this.eventregister.setPatientInitials('DEMO')
+        this.demoModeAlert()
+      }
       this.aclsService.askRhythm.subscribe(() => {
           this.askRhythm();
       });
@@ -127,6 +143,13 @@ export class FolderPage implements OnInit {
           ]
         
         })
+    }
+    demoModeAlert(){
+      this.alertService.create({
+        header: 'Welcome to the demo mode!',
+        message: 'In this demo, the times are reduced so you can navigate the interface faster and get familiar with it before an actual CPR event. The information gathered in demo mode will be registered in History with \'Demo\' as the patient\'s name. You may delete this registers any time',
+        buttons: ['OK']
+      })
     } 
 
     restartValues(){
@@ -137,6 +160,7 @@ export class FolderPage implements OnInit {
       this.aclsService.doseAmio = '300 mg bolus';
       this.aclsService.showStopButton = false;
       this.eventregister.antiarrselected = 'Antiarrhythmic';
+      this.eventregister.patientInitials = '';
     }
     async editInformationInmediately(){
       let event = await this.eventregister.returnStorgeEntry()

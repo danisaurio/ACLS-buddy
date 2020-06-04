@@ -14,6 +14,7 @@ export class TimerService {
   public time = "00:00.000"
   public timeoutId;
   public shouldContinue: boolean;
+  public timeoutTime: number;
 
   constructor() { }
 
@@ -66,7 +67,7 @@ export class TimerService {
     twoMinNotification(){
       this.shouldContinue = true;
       return new Promise(resolve => {
-        this.timeoutId = setTimeout(() => resolve(this.shouldContinue), 4000);
+        this.timeoutId = setTimeout(() => resolve(this.shouldContinue), this.timeoutTime);
       })
     }
     stopTwoMinNotification(){

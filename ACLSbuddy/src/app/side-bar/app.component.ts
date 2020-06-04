@@ -26,6 +26,11 @@ export class AppComponent implements OnInit {
       title: 'Statistics',
       url: '/folder/statistics',
       icon: 'stats-chart'
+    },
+    {
+      title: 'Demo mode',
+      url: '/folder/Demo',
+      icon: 'help-circle'
     }
   ];
 
