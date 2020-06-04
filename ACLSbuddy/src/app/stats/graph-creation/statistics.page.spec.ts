@@ -37,12 +37,12 @@ describe('StatisticsPage', () => {
   });
 describe('should show just 1 set of statistics',() => {
   it('show personal and no national', () => {
-    component.selectChart('personal')
-    expect(component.personal).toEqual(true)
+    component.selectChart('patient')
     expect(component.patient).toEqual(false)
+    expect(component.personal).toEqual(true)
   })
   it('show national and no personal', () => {
-    component.selectChart('national')
+    component.selectChart('personal')
     expect(component.patient).toEqual(true)
     expect(component.personal).toEqual(false)
   })
