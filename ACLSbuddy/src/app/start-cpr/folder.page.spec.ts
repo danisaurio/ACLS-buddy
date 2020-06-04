@@ -32,12 +32,12 @@ describe('FolderPage', () => {
     })
     it('to step12input', () => {
       spyOn(component, 'rosc');
-      component.aclsService.step12input.next();
+      component.aclsService.step12inputSubject.next();
       expect(component.rosc).toHaveBeenCalled();
     })
     it('to askrhythm', () => {
       spyOn(component, 'askRhythm');
-      component.aclsService.askRhythm.next();
+      component.aclsService.askRhythmSubject.next();
       expect(component.askRhythm).toHaveBeenCalled();
     }) 
   })

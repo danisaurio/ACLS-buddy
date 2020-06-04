@@ -10,8 +10,8 @@ import { EventRegisterService } from './event-register.service';
 export class AclsService {
 
   public step:number = 0;
-  public askRhythm: Subject<void>;
-  public step12input: Subject<void>;
+  public askRhythmSubject: Subject<void>;
+  public step12inputSubject: Subject<void>;
   public disableButton: Boolean;
   public showStopButton;
   public antiArrDose: number = 0;
@@ -24,8 +24,8 @@ export class AclsService {
     public timerservice:TimerService,
     public eventresgister: EventRegisterService
     ) {
-      this.step12input = new Subject();
-      this.askRhythm = new Subject();
+      this.step12inputSubject = new Subject();
+      this.askRhythmSubject = new Subject();
     }
   decision(string){
     if (this.step === 0) {
@@ -101,16 +101,16 @@ export class AclsService {
   async step4(){
     this.step = 4;
     const shouldContinue = await this.timerservice.twoMinNotification();
-    if (shouldContinue === true){
-      this.askRhythm.next();
+    if (await shouldContinue === true){
+      this.askRhythmSubject.next();
     }
   }
   async step6(){
     this.disableButton = false;
     this.step = 6;
     const shouldContinue = await this.timerservice.twoMinNotification();
-    if (shouldContinue === true){
-      this.askRhythm.next();
+    if (await shouldContinue === true){
+      this.askRhythmSubject.next();
     }   
   }
   async step8(){
@@ -123,7 +123,7 @@ export class AclsService {
     this.step = 8;
     const shouldContinue = await this.timerservice.twoMinNotification();
     if (shouldContinue === true){
-      this.askRhythm.next();
+      this.askRhythmSubject.next();
     }  
   }
   async step10(){
@@ -131,20 +131,20 @@ export class AclsService {
     this.step = 10;
     const shouldContinue = await this.timerservice.twoMinNotification();
     if (shouldContinue === true){
-      this.askRhythm.next();
+      this.askRhythmSubject.next();
     }  
   }
   async step11(){
     this.step = 11;
     const shouldContinue = await this.timerservice.twoMinNotification();
     if (shouldContinue === true){
-      this.askRhythm.next();
+      this.askRhythmSubject.next();
     } 
   }
   step12(){
     let endByFlowchart = new Date;
     this.eventresgister.rcpEventEnds(endByFlowchart)
-    this.step12input.next();
+    this.step12inputSubject.next();
   }
   giveShockConfirmation(step: number){
     let schockTime = new Date;

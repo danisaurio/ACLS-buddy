@@ -41,10 +41,10 @@ export class FolderPage implements OnInit {
         this.eventregister.setPatientInitials('DEMO')
         this.demoModeAlert()
       }
-      this.aclsService.askRhythm.subscribe(() => {
+      this.aclsService.askRhythmSubject.subscribe(() => {
           this.askRhythm();
       });
-      this.aclsService.step12input.subscribe(() => {
+      this.aclsService.step12inputSubject.subscribe(() => {
           this.rosc();
       });
     }

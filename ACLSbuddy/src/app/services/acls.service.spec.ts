@@ -32,12 +32,12 @@ describe('AclsService', () => {
         expect(service.step).toEqual(3);
       });
       it('should go to step 10 when rhythm is not shockeable', fakeAsync (() => {
-        spyOn(service.askRhythm, 'next');
+        spyOn(service.askRhythmSubject, 'next');
         service.decision('isNotShockeable');
         expect(service.step).toEqual(10);
         expect(service.disableButton).toBeFalse();
         tick(120000);
-        expect(service.askRhythm.next).toHaveBeenCalled();
+        expect(service.askRhythmSubject.next).toHaveBeenCalled();
       }));
     })
     describe('step is 4', () => {
@@ -47,9 +47,9 @@ describe('AclsService', () => {
         expect(service.step).toEqual(5);
       })
       it('should go to step 12 when rhythm is not shockeable', () => {
-        spyOn(service.step12input, 'next');
+        spyOn(service.step12inputSubject, 'next');
         service.decision('isNotShockeable');
-        expect(service.step12input.next).toHaveBeenCalled();
+        expect(service.step12inputSubject.next).toHaveBeenCalled();
       })
     })
     describe('step is 6', () => {
@@ -59,9 +59,9 @@ describe('AclsService', () => {
         expect(service.step).toEqual(7);
       })
       it('should go to step 12 when rhythm is not shockeable', () => {
-        spyOn(service.step12input, 'next');
+        spyOn(service.step12inputSubject, 'next');
         service.decision('isNotShockeable');
-        expect(service.step12input.next).toHaveBeenCalled();
+        expect(service.step12inputSubject.next).toHaveBeenCalled();
       })
     })
     describe('step is 8', () => {
@@ -71,9 +71,9 @@ describe('AclsService', () => {
         expect(service.step).toEqual(5);
       })
       it('should go to step 12 when step is 8 and rhythm is not shockeable', () => {
-        spyOn(service.step12input, 'next');
+        spyOn(service.step12inputSubject, 'next');
         service.decision('isNotShockeable');
-        expect(service.step12input.next).toHaveBeenCalled();
+        expect(service.step12inputSubject.next).toHaveBeenCalled();
       })
     })
     describe('step is 10', () =>{
@@ -83,11 +83,11 @@ describe('AclsService', () => {
         expect(service.step).toEqual(5);
       })
       it('should go to step 11 when rhythm is not shockeable', fakeAsync(() => {
-        spyOn(service.askRhythm, 'next');
+        spyOn(service.askRhythmSubject, 'next');
         service.decision('isNotShockeable');
         expect(service.step).toEqual(11);
         tick(120000);
-        expect(service.askRhythm.next).toHaveBeenCalled();
+        expect(service.askRhythmSubject.next).toHaveBeenCalled();
       }))
     })
     describe('step is 11', () =>{
@@ -97,9 +97,9 @@ describe('AclsService', () => {
         expect(service.step).toEqual(5);
       })
       it('should go to step 12 when rhythm is not shockeable', () => {
-        spyOn(service.step12input, 'next');
+        spyOn(service.step12inputSubject, 'next');
         service.decision('isNotShockeable');
-        expect(service.step12input.next).toHaveBeenCalled();
+        expect(service.step12inputSubject.next).toHaveBeenCalled();
       })
     })
 
@@ -126,21 +126,21 @@ describe('AclsService', () => {
   })
   describe('post-shock functions', () =>{
     it('should wait 2 minutes and ask rhythm in step 4', fakeAsync(() => {
-      spyOn(service.askRhythm, 'next');
+      spyOn(service.askRhythmSubject, 'next');
       service.step4();
       expect(service.step).toEqual(4);
       tick(120000);
-      expect(service.askRhythm.next).toHaveBeenCalled();
+      expect(service.askRhythmSubject.next).toHaveBeenCalled();
     }))
     it('should wait 2 minutes, give 1st dose, and ask rhythm in step 6', fakeAsync(() => {
-      spyOn(service.askRhythm, 'next');
+      spyOn(service.askRhythmSubject, 'next');
       service.antiArrDose = 0;
       service.step6();
       expect(service.step).toEqual(6);
       expect(service.doseLido).toEqual('1 - 1.5 mg/kg');
       expect(service.doseAmio).toEqual('300 mg bolus');
       tick(120000);
-      expect(service.askRhythm.next).toHaveBeenCalled();
+      expect(service.askRhythmSubject.next).toHaveBeenCalled();
     }))
     it('should change drug dose in step 8', () =>{
       service.antiArrDose = 1;
@@ -149,11 +149,11 @@ describe('AclsService', () => {
       expect(service.doseAmio).toEqual('150 mg');
     })
     it('should wait 2 minutes and ask rhythm in step 8', fakeAsync(() => {
-      spyOn(service.askRhythm, 'next');
+      spyOn(service.askRhythmSubject, 'next');
       service.step8();
       expect(service.step).toEqual(8);
       tick(120000);
-      expect(service.askRhythm.next).toHaveBeenCalled();
+      expect(service.askRhythmSubject.next).toHaveBeenCalled();
     }))
    })
    describe('drugAdmin', () => {
