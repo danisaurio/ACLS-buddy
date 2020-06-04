@@ -46,7 +46,7 @@
           <h3><strong>Epinephrine 1mg</strong></h3><br>
           <ion-button (click)="aclsService.drugAdmin('epi')" 
             [disabled]="aclsService.disableButton"
-            color="success"
+            color={{bannercolor}}
             expand="block" 
             shape="round">Confirm Epinephine 1mg</ion-button>
           <h3>Consider advanced airway, capnography</h3>
@@ -58,7 +58,7 @@
             *ngIf="this.aclsService.selectedDrug !== 'Lidocaine'"
             (click)="aclsService.drugAdmin('Amiodarone')" 
             [disabled]="aclsService.disableButton"
-            color="success"
+            color={{bannercolor}}
             expand="block" 
             shape="round">Confirm Amiodarone {{aclsService.doseAmio}}</ion-button>
           <br>
@@ -66,7 +66,7 @@
             *ngIf="this.aclsService.selectedDrug !== 'Amiodarone'" 
             (click)="aclsService.drugAdmin('Lidocaine')" 
             [disabled]="aclsService.disableButton"
-            color="success"
+            color={{bannercolor}}
             expand="block" 
             shape="round">Confirm Lidocaine {{aclsService.doseLido}}</ion-button>
         </div>
@@ -75,7 +75,7 @@
           <h3><strong>Epinephrine 1mg</strong></h3>
           <ion-button (click)="aclsService.drugAdmin('epi')" 
           [disabled]="aclsService.disableButton"
-          color="success"
+          color={{bannercolor}}
           expand="block" 
           shape="round">Confirm Epinephine 1mg</ion-button>
           <h3>Consider advanced airway, capnography</h3>

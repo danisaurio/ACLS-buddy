@@ -57,7 +57,6 @@ export class StatisticsPage{
 
   async nationalInformationCard(){
     let surv = await this.graphcalc.returnRatesGraph()
-    console.log(surv)
     if(surv[0] > surv[1]){
       this.congratulate = true;
     }
