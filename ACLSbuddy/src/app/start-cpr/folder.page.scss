@@ -26,9 +26,7 @@ ion-menu-button {
 #container a {
   text-decoration: none;
 }
-ion-content, ion-footer{
-  --ion-background-color:rgb(240, 248, 241);
-}
+
 ion-grid {
   height: 100%;
 }
@@ -54,7 +52,6 @@ ion-grid {
 }
 #footer{
   height: auto;
-  background-color: rgb(240, 248, 241);
 }
 
 #rayitas{
