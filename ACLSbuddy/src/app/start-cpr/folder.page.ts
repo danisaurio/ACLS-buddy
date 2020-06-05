@@ -4,6 +4,7 @@ import { AclsService } from '../services/acls.service';
 import { TimerService } from '../services/timer.service';
 import { EventRegisterService } from '../services/event-register.service';
 import { AlertService } from '../services/alert.service';
+import { MenuController } from '@ionic/angular';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class FolderPage implements OnInit {
     public timerservice:TimerService,
     public eventregister: EventRegisterService,
     public router: Router,
+    private menu: MenuController,
     ) { }
 
     ngOnInit() {
@@ -62,6 +64,7 @@ export class FolderPage implements OnInit {
       this.aclsService.showStopButton = true;
       const startTime = new Date;
       this.eventregister.rcpEventStart(startTime);
+      this.menu.enable(false);
     }
     async askRhythm() {
       await this.alertService.create({
@@ -119,6 +122,7 @@ export class FolderPage implements OnInit {
               this.timerservice.stop();
               const endTime = new Date();
               await this.eventregister.rcpEventEnds(endTime);
+              this.menu.enable(true);
               this.gatherPatientData();
             }
           },

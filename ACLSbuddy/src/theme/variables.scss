@@ -77,8 +77,11 @@
 }
 @media (prefers-color-scheme: light){
   body{
-    --ion-background-color: rgb(240, 248, 241);
+    --ion-background-color: rgb(240, 248, 240);
   }
+  ion-alert{
+    --ion-background-color: #ffffff;
+   }
 }
 
 @media (prefers-color-scheme: dark) {

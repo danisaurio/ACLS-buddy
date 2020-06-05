@@ -13,7 +13,7 @@ export class AclsService {
   public askRhythmSubject: Subject<void>;
   public step12inputSubject: Subject<void>;
   public disableButton: Boolean;
-  public showStopButton;
+  public showStopButton: boolean;
   public antiArrDose: number = 0;
   public doseLido = '1 - 1.5 mg/kg';
   public doseAmio = '300 mg bolus';
