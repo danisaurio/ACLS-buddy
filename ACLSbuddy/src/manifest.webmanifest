@@ -1,6 +1,6 @@
 {
-  "name": "app",
-  "short_name": "app",
+  "name": "ACLS Buddy",
+  "short_name": "ACLS Buddy",
   "theme_color": "#000000",
   "background_color": "#fafafa",
   "display": "fullscreen",
