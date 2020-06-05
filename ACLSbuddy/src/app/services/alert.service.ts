@@ -14,7 +14,7 @@ export class AlertService {
   ) { }
 
   async create(alertParams){
-    this.pendingAlerts.push(alertParams)
+    this.pendingAlerts.unshift(alertParams)
     if(this.pendingAlerts.length === 1){
       await this.showAlert()
     } 
@@ -24,7 +24,7 @@ export class AlertService {
       const alert = await this.alertController.create(this.pendingAlerts[0])
       await alert.present();
       await alert.onDidDismiss().then(()=>{
-        this.pendingAlerts.shift()
+        this.pendingAlerts.pop()
         this.showAlert()
       })
    }

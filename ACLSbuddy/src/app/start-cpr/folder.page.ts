@@ -15,6 +15,8 @@ export class FolderPage implements OnInit {
   public folder: string;
   public bannercolor: string;
   public bannermessage: string;
+  private subscriptionRhythm
+  private subcriptionRosc
 
   constructor(
     private activatedRoute: ActivatedRoute, 
@@ -41,13 +43,19 @@ export class FolderPage implements OnInit {
         this.eventregister.setPatientInitials('DEMO')
         this.demoModeAlert()
       }
-      this.aclsService.askRhythmSubject.subscribe(() => {
+      this.subscriptionRhythm = this.aclsService.askRhythmSubject.subscribe(() => {
           this.askRhythm();
       });
-      this.aclsService.step12inputSubject.subscribe(() => {
+      this.subcriptionRosc = this.aclsService.step12inputSubject.subscribe(() => {
           this.rosc();
       });
     }
+
+    ngOnDestroy(){
+      this.subscriptionRhythm.unsubscribe()
+      this.subcriptionRosc.unsubscribe()
+    }
+
     start() {
       this.timerservice.start();
       this.askRhythm();
