@@ -49,10 +49,11 @@ describe('AppComponent', () => {
     await fixture.detectChanges();
     const app = fixture.nativeElement;
     const menuItems = app.querySelectorAll('ion-label');
-    expect(menuItems.length).toEqual(3);
+    expect(menuItems.length).toEqual(4);
     expect(menuItems[0].textContent).toContain('CPR');
     expect(menuItems[1].textContent).toContain('History');
     expect(menuItems[2].textContent).toContain('Statistics');
+    expect(menuItems[3].textContent).toContain('Demo');
   });
 
   it('should have urls', async () => {
@@ -60,10 +61,12 @@ describe('AppComponent', () => {
     await fixture.detectChanges();
     const app = fixture.nativeElement;
     const menuItems = app.querySelectorAll('ion-item');
-    expect(menuItems.length).toEqual(3);
-    expect(menuItems[0].getAttribute('ng-reflect-router-link')).toEqual('/folder/CPR');
-    expect(menuItems[1].getAttribute('ng-reflect-router-link')).toEqual('/folder/history');
-    expect(menuItems[2].getAttribute('ng-reflect-router-link')).toEqual('/folder/statistics');
+    expect(menuItems.length).toEqual(5);
+    expect(menuItems[0].getAttribute('ng-reflect-router-link')).toBeNull;
+    expect(menuItems[1].getAttribute('ng-reflect-router-link')).toEqual('/folder/CPR');
+    expect(menuItems[2].getAttribute('ng-reflect-router-link')).toEqual('/folder/history');
+    expect(menuItems[3].getAttribute('ng-reflect-router-link')).toEqual('/folder/statistics');
+    expect(menuItems[4].getAttribute('ng-reflect-router-link')).toEqual('/folder/Demo');
   });
 
 });
