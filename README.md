@@ -1,6 +1,5 @@
 Capstone for a Bachelor of Science in Computer Science degree
 
-1.	Project topic and description:
-When a person enters into cardiac arrest in a hospital, there are some very well defined steps to go through to perform a successful CPR. These steps need to be remembered thoughtfully by the head of the resuscitation team but they may change according to the patient's condition. Also, the hour of administration of each medication needs to be considered and registered, nowadays that job is done by a second individual writing the information on a whiteboard. All this considered, there is much space for human error and wasted human resources.
-2.	Project purpose/goals:
-The proposal comprehends the development of a mobile application according to the ACLS (Advanced Cardiovascular Life Support) guidelines. It would be able to lead the personnel through the flow chart and also register the time of each drug administration, so it will inform the team when it is safe to administrate medications or to continue the compressions. Therefore, giving less space to human errors and reducing the waste of human resources.
+Project topic and description:
+Even though the resuscitation of a person is a very critical effort in medicine it still has some very large space for human-error. The algorithm designed by the AHA on its ACLS course constantly changes, there is one high-skilled member of the resuscitation team whose sole responsibility is to write-down times on a whiteboard, and there is no feedback to the team about their performance rates. These things considered, ‘ACLS buddy’ was conceived. ACLS buddy is a mobile app that will assist resuscitation teams on the decision-making process, release one member of the team of his/her current duties, improve the accuracy of the patient’s records, and provide feedback about the outcomes of the efforts.
+
