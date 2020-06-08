@@ -114,10 +114,10 @@ os_data_X = pd.DataFrame(data=os_data_X,columns=columns )
 os_data_y= pd.DataFrame(data=os_data_y,columns=['rosc'])
 # we can Check the numbers of our data
 print("length of oversampled data is ",len(os_data_X))
-print("Number of no subscription in oversampled data",len(os_data_y[os_data_y['rosc']==0]))
-print("Number of subscription",len(os_data_y[os_data_y['rosc']==1]))
-print("Proportion of no subscription data in oversampled data is ",len(os_data_y[os_data_y['rosc']==0])/len(os_data_X))
-print("Proportion of subscription data in oversampled data is ",len(os_data_y[os_data_y['rosc']==1])/len(os_data_X))
+print("Number of deaths in oversampled data",len(os_data_y[os_data_y['rosc']==0]))
+print("Number of survival",len(os_data_y[os_data_y['rosc']==1]))
+print("Proportion of deaths in oversampled data is ",len(os_data_y[os_data_y['rosc']==0])/len(os_data_X))
+print("Proportion of survival in oversampled data is ",len(os_data_y[os_data_y['rosc']==1])/len(os_data_X))
 
 
 # In[9]:
