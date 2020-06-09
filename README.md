@@ -8,8 +8,8 @@ Even though the resuscitation of a person is a very critical effort in medicine 
 
 - **CPR:** Walk-through through the ACLS flowchart in face of a cardiac arrest. Confirmation buttons imply the recognition of completing the instruction and automatically register the times.
 
-- **History:** All CPRs performed with the app. Each event has a colored icon indicating if the patient's information associated with the event is complete, partially-complete, or empty.
+- **History:** All the CPRs performed with the app. Each event has a colored icon indicating if the patient's information associated with the event is complete, partially-complete, or empty.
 
-- **Statistics:** patients statistics depict the characteristics of the population attended by the client. Personal statistics state the general performance of the CPRs performed comparing net survival rate VS projected survival rate for the population treated. 
+- **Statistics:** Patients statistics depict the characteristics of the population attended by the client. Personal statistics state the general performance of the CPRs performed comparing the net survival rate accomplished by the client VS the projected survival rate for the population treated. 
 
 - **Demo Mode:** Access to the Demo Mode through the menu to get an abbreviated version of the CPR (reduced times to facilitate navigation).
