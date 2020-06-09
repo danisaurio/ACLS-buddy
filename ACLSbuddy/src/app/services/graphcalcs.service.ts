@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import  *  as  coefs  from  '../stats/national/logical-regression/coefs.json';
-import { ValueAccessor } from '@ionic/angular/directives/control-value-accessors/value-accessor';
 
 @Injectable({
   providedIn: 'root'

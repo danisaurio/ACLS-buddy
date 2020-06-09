@@ -18,8 +18,10 @@ export class StatisticsPage{
   @ViewChild('nationalChart') nationalChart;
 
   
-  public patient: boolean = false;
+  public patient: boolean = true;
   public personal: boolean = true;
+  public infoAvailable: boolean = true;
+  public infoComplete: boolean = true;
   public congratulate: boolean = true;
   public colorArray: any = [];
   public registers: Chart;
@@ -42,17 +44,44 @@ export class StatisticsPage{
     this.createNationalChart();  
     this.graphcalc.getNationalRegCoef();  
     this.nationalInformationCard()
+    this.selectChart('');
   }
 
-  selectChart(selectedChart: string){
+  async selectChart(selectedChart: string){
+    let totalRegisters = await this.graphcalc.getRegistersValues()
+    let validEntries = (await this.graphcalc.getValidEntries()).length
+    if (selectedChart === ''){
+      selectedChart = 'patient'
+    }
     if (selectedChart === 'patient'){
-      this.patient = false;
-      this.personal = true;
+      if(totalRegisters[0] + totalRegisters[1] === 0){
+        this.infoAvailable = false;
+        this.infoComplete = true;
+        this.patient = true;
+        this.personal = true;
+      }
+      else{
+        this.infoAvailable = true;
+        this.infoComplete = true;
+        this.patient = false;
+        this.personal = true;
+      }
     }
     if (selectedChart === 'personal'){
-      this.patient = true;
-      this.personal = false;   
+      if (validEntries === 0){
+        this.infoComplete = false;
+        this.infoAvailable = true;
+        this.patient = true;
+        this.personal = true;
+      }
+      else{
+        this.infoComplete = true;
+        this.infoAvailable = true;
+        this.patient = true;
+        this.personal = false;  
+      }
     }
+
   }
 
   async nationalInformationCard(){
