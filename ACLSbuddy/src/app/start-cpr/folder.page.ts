@@ -59,6 +59,9 @@ export class FolderPage implements OnInit {
     }
 
     start() {
+      if (this.activatedRoute.snapshot.paramMap.get('id') !=='CPR'){
+        this.eventregister.setPatientInitials('DEMO')
+      }
       this.timerservice.start();
       this.askRhythm();
       this.aclsService.showStopButton = true;
