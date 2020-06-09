@@ -42,9 +42,7 @@ export class HistoryPage implements OnInit {
 
   async deleteRegister(p: {[key: string]: any}){
     this.alertService.create({
-      mode: "ios",
       header: 'Are you sure you want to delete this entry?',
-      backdropDismiss: false,
       buttons: [
         {
           text: 'YES',
@@ -55,7 +53,9 @@ export class HistoryPage implements OnInit {
               message: 'Register deleted',
               buttons: [{
                 text: 'OK',
-                handler: () => {this.ngOnInit();}
+                handler: () => {
+                  this.ionViewWillEnter()
+                }
               }]
             });
           }
