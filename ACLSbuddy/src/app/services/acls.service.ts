@@ -17,7 +17,7 @@ export class AclsService {
   public antiArrDose: number = 0;
   public doseLido = '1 - 1.5 mg/kg';
   public doseAmio = '300 mg bolus';
-  public selectedDrug = 'noSelected';
+  public selectedDrug = 'No drug selected';
 
 
   constructor(
