@@ -1,4 +1,4 @@
-**Capstone for a Bachelor of Science in Computer Science degree**
+# Capstone for a Bachelor of Science in Computer Science degree
 
 >Project topic and description:
 
