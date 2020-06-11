@@ -7,7 +7,7 @@ Even though the resuscitation of a person is a very critical effort in medicine 
 ## Quick Start
 
 Things you need to install:
-- node. Use [nvm](https://github.com/nvm-sh/nvm)
+- node. Use [nvm](https://github.com/nvm-sh/nvm) to install the latest LTS version
 
 Open a terminal and follow these instructions:
 
