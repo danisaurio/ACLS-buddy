@@ -13,7 +13,7 @@ Open a terminal and follow these instructions:
 
 ```sh
 # clone the repo
-git clone git@github.com:Danisauri/ACLS-buddy.git
+git clone git@github.com:Danisaurio/ACLS-buddy.git
 
 # open the project directory
 cd ACLS-buddy/ACLSbuddy/
